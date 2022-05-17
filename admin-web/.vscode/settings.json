@@ -1,0 +1,26 @@
+{
+  "eslint.options": {
+    "extensions": [
+      ".js",
+      ".ts",
+      ".jsx",
+      ".tsx",
+      ".vue"
+    ],
+  },
+  "eslint.validate": [
+    // "vue",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": false,
+    "source.fixAll.eslint": true
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}
