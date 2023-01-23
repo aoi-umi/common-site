@@ -34,7 +34,6 @@ export class AdminUserDetail extends Base {
       },
     )
     this.data = rs
-    console.log(this.data)
     return rs
   }
 
