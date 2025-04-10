@@ -8,10 +8,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Response, Request } from 'express';
-import {
-  ReqParams,
-  ReqParamsResult,
-} from '@/decorators/req-params.decorator';
+import { ReqParams, ReqParamsResult } from '@/decorators/req-params.decorator';
 import { Auth } from '@/processors/auth/auth.decorator';
 import { dev } from '@/processors/config/config.service';
 import { CommonException } from '@/processors/exception/common-exception';
