@@ -3,12 +3,12 @@ import { InjectModel } from '@nestjs/sequelize';
 import { isDefined } from 'class-validator';
 import { Op } from 'sequelize';
 
-import { CommonException } from 'src/processors/exception/common-exception';
+import { CommonException } from '@/processors/exception/common-exception';
 import {
   DbUtilsService,
   FindManyOptions,
-} from 'src/processors/utils/db-utils.service';
-import { UtilsService } from 'src/processors/utils/utils.service';
+} from '@/processors/utils/db-utils.service';
+import { UtilsService } from '@/processors/utils/utils.service';
 import { SysAuthority } from '../sys-authority/entities/sys-authority.entity';
 import {
   SysRoleCreateDto,

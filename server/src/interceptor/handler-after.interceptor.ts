@@ -7,7 +7,7 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Request } from 'express';
-import { ResponseCommon } from 'src/processors/response/response.common';
+import { ResponseCommon } from '@/processors/response/response.common';
 
 @Injectable()
 export class HandlerAfterInterceptor implements NestInterceptor {
@@ -19,6 +19,7 @@ export class HandlerAfterInterceptor implements NestInterceptor {
       map((data) => {
         let resConfig = req.myData?.resConfig;
         const resData = new ResponseCommon(null, data).getResObj();
+        if (resConfig?.test) resData['test'] = true;
         logObj.end(req, resData);
         return resData;
       }),

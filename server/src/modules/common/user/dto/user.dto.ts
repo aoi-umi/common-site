@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { FindOptionBaseDto } from 'src/models/query.dto';
+import { FindOptionBaseDto } from '@/models/query.dto';
 
 export class UserSignInDto {
   code: string;

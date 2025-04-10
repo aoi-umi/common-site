@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
-import { QueryHandlerPipe } from 'src/pipes/query-handler.pipe';
+import { QueryHandlerPipe } from '@/pipes/query-handler.pipe';
 import { SysRoleService } from './sys-role.service';
 import {
   SysRoleCreateDto,

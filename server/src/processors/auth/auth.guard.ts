@@ -8,7 +8,7 @@ import {
 import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 
-import { SysApiService } from 'src/modules/admin/sys-api/sys-api.service';
+import { SysApiService } from '@/modules/admin/sys-api/sys-api.service';
 
 import * as authDeco from './auth.decorator';
 

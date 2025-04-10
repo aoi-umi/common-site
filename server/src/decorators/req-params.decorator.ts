@@ -2,8 +2,8 @@ import { Request } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { NormalUser } from 'src/processors/auth/auth.types';
-import { SignInAdminUser } from 'src/modules/admin/admin-user/admin-user.service';
+import { NormalUser } from '@/processors/auth/auth.types';
+import { SignInAdminUser } from '@/modules/admin/admin-user/admin-user.service';
 
 declare module 'express' {
   interface Request {

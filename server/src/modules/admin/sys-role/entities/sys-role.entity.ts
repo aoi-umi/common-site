@@ -10,7 +10,7 @@ import {
   Index,
 } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
-import { BaseEntity } from 'src/models/base.entity';
+import { BaseEntity } from '@/models/base.entity';
 import { SysAuthority } from '../../sys-authority/entities/sys-authority.entity';
 import { SysRoleData } from '../sys-role.constants';
 

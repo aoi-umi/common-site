@@ -5,8 +5,8 @@ import {
   IsNotEmpty,
   ValidateNested,
 } from 'class-validator';
-import { TrimOrNull } from 'src/decorators/transformer';
-import { DeleteBaseDto } from 'src/models/operate.dto';
+import { TrimOrNull } from '@/decorators/transformer';
+import { DeleteBaseDto } from '@/models/operate.dto';
 
 export class SysMenuQueryDto {}
 class MenuAuthorityDto {

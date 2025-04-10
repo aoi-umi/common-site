@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import {
   DbUtilsService,
   FindManyOptions,
-} from 'src/processors/utils/db-utils.service';
+} from '@/processors/utils/db-utils.service';
 
 import { Oauth } from './entities/oauth.entity';
 import { User } from './entities/user.entity';

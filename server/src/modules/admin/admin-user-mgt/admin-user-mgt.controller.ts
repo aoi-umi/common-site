@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { QueryHandlerPipe } from 'src/pipes/query-handler.pipe';
+import { QueryHandlerPipe } from '@/pipes/query-handler.pipe';
 
 import { AdminUserService } from '../admin-user/admin-user.service';
 import {

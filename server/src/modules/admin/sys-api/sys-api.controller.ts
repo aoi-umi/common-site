@@ -7,7 +7,7 @@ import {
   Query,
   Param,
 } from '@nestjs/common';
-import { QueryHandlerPipe } from 'src/pipes/query-handler.pipe';
+import { QueryHandlerPipe } from '@/pipes/query-handler.pipe';
 import { SysApiService } from './sys-api.service';
 import {
   SysApiDeleteDto,

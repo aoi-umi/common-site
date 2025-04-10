@@ -17,6 +17,12 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
+    "lib": ["ES2020"],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
     "types": [
       "jest",
       "./config"

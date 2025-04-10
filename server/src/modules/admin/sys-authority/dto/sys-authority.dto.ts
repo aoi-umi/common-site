@@ -1,7 +1,7 @@
 import { IsDefined, IsNotEmpty } from 'class-validator';
-import { TrimOrNull } from 'src/decorators/transformer';
-import { DeleteBaseDto } from 'src/models/operate.dto';
-import { FindOptionBaseDto } from 'src/models/query.dto';
+import { TrimOrNull } from '@/decorators/transformer';
+import { DeleteBaseDto } from '@/models/operate.dto';
+import { FindOptionBaseDto } from '@/models/query.dto';
 
 class SysAuthoritySaveDto {
   @TrimOrNull()

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 
-import { DbUtilsService } from 'src/processors/utils/db-utils.service';
+import { DbUtilsService } from '@/processors/utils/db-utils.service';
 import { SysPage } from '../sys/entities/sys-page.entity';
 import { SysAuthority } from '../sys-authority/entities/sys-authority.entity';
 import { SysMenuService } from './sys-menu.service';

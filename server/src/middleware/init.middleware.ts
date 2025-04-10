@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { LoggerService } from 'src/processors/logger/logger.service';
+import { LoggerService } from '@/processors/logger/logger.service';
 
 export const init = (opt: { loggerService: LoggerService }) => {
   const { loggerService } = opt;

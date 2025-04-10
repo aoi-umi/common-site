@@ -10,7 +10,7 @@ import {
   Index,
 } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
-import { BaseEntity } from 'src/models/base.entity';
+import { BaseEntity } from '@/models/base.entity';
 
 @Table({ tableName: 'sys_menu_authority' })
 export class SysMenuAuthority extends BaseEntity {

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { UserCommonModule } from 'src/modules/common/user/user.module';
+import { UserCommonModule } from '@/modules/common/user/user.module';
 
 import { UserController } from './user.controller';
 

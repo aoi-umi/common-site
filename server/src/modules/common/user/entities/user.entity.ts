@@ -9,7 +9,7 @@ import {
   IsUUID,
 } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
-import { BaseEntity } from 'src/models/base.entity';
+import { BaseEntity } from '@/models/base.entity';
 
 @Table({ tableName: 'user' })
 export class User extends BaseEntity {

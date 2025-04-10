@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MiniProgram, FileStore } from 'wechat-jssdk';
-import { ConfigService } from 'src/processors/config/config.service';
+import { ConfigService } from '@/processors/config/config.service';
 
 @Injectable()
 export class WeChatService {

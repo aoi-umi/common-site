@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
 import { Request } from 'express';
-import { ResponseCommon } from 'src/processors/response/response.common';
+import { ResponseCommon } from '@/processors/response/response.common';
 
 @Catch()
 export class AllExceptionsFilter<T> implements ExceptionFilter {

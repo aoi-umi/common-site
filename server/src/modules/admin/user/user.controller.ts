@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { QueryHandlerPipe } from 'src/pipes/query-handler.pipe';
-import { UserFindOptionDto } from 'src/modules/common/user/dto/user.dto';
-import { UserService } from 'src/modules/common/user/user.service';
+import { QueryHandlerPipe } from '@/pipes/query-handler.pipe';
+import { UserFindOptionDto } from '@/modules/common/user/dto/user.dto';
+import { UserService } from '@/modules/common/user/user.service';
 
 @Controller()
 export class UserController {

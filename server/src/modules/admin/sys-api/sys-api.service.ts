@@ -3,13 +3,13 @@ import * as os from 'os';
 import { Op } from 'sequelize';
 import { InjectModel } from '@nestjs/sequelize';
 
-import { UtilsService } from 'src/processors/utils/utils.service';
-import { ConfigService } from 'src/processors/config/config.service';
-import { CommonException } from 'src/processors/exception/common-exception';
+import { UtilsService } from '@/processors/utils/utils.service';
+import { ConfigService } from '@/processors/config/config.service';
+import { CommonException } from '@/processors/exception/common-exception';
 import {
   DbUtilsService,
   FindManyOptions,
-} from 'src/processors/utils/db-utils.service';
+} from '@/processors/utils/db-utils.service';
 
 import { SysAuthority } from '../sys-authority/entities/sys-authority.entity';
 import { SysApi } from './entities/sys-api.entity';

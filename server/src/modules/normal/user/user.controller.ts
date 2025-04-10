@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
-import { UtilsService } from 'src/processors/utils/utils.service';
-import { UserService } from 'src/modules/common/user/user.service';
-import { OauthName } from 'src/modules/common/user/constants';
-import { UserSignInDto } from 'src/modules/common/user/dto/user.dto';
-import { WeChatService } from 'src/modules/common/wechat/wechat.service';
+import { UtilsService } from '@/processors/utils/utils.service';
+import { UserService } from '@/modules/common/user/user.service';
+import { OauthName } from '@/modules/common/user/constants';
+import { UserSignInDto } from '@/modules/common/user/dto/user.dto';
+import { WeChatService } from '@/modules/common/wechat/wechat.service';
 
 @Controller()
 export class UserController {

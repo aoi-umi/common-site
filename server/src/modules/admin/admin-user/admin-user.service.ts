@@ -3,11 +3,11 @@ import { InjectModel } from '@nestjs/sequelize';
 import { InferAttributes, FindOptions } from 'sequelize/types';
 import { Op } from 'sequelize';
 
-import { CacheService } from 'src/processors/cache/cache.service';
-import { ConfigService } from 'src/processors/config/config.service';
-import { CommonException } from 'src/processors/exception/common-exception';
-import { DbUtilsService } from 'src/processors/utils/db-utils.service';
-import { UtilsService } from 'src/processors/utils/utils.service';
+import { CacheService } from '@/processors/cache/cache.service';
+import { ConfigService } from '@/processors/config/config.service';
+import { CommonException } from '@/processors/exception/common-exception';
+import { DbUtilsService } from '@/processors/utils/db-utils.service';
+import { UtilsService } from '@/processors/utils/utils.service';
 import { SysAuthority } from '../sys-authority/entities/sys-authority.entity';
 
 import { SysRole } from '../sys-role/entities/sys-role.entity';

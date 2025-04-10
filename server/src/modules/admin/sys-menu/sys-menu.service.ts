@@ -3,8 +3,8 @@ import { InjectModel } from '@nestjs/sequelize';
 import { isDefined } from 'class-validator';
 import { InferAttributes, Op, QueryTypes } from 'sequelize';
 
-import { CommonException } from 'src/processors/exception/common-exception';
-import { DbUtilsService } from 'src/processors/utils/db-utils.service';
+import { CommonException } from '@/processors/exception/common-exception';
+import { DbUtilsService } from '@/processors/utils/db-utils.service';
 import { SysAuthority } from '../sys-authority/entities/sys-authority.entity';
 import { SysPage } from '../sys/entities/sys-page.entity';
 import {

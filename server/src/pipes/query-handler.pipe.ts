@@ -1,5 +1,5 @@
 import { PipeTransform, Injectable, ArgumentMetadata } from '@nestjs/common';
-import { FindOptionBaseDto } from 'src/models/query.dto';
+import { FindOptionBaseDto } from '@/models/query.dto';
 
 @Injectable()
 export class QueryHandlerPipe implements PipeTransform {

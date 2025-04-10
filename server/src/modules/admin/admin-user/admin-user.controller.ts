@@ -11,11 +11,11 @@ import { Response, Request } from 'express';
 import {
   ReqParams,
   ReqParamsResult,
-} from 'src/decorators/req-params.decorator';
-import { Auth } from 'src/processors/auth/auth.decorator';
-import { dev } from 'src/processors/config/config.service';
-import { CommonException } from 'src/processors/exception/common-exception';
-import { UtilsService } from 'src/processors/utils/utils.service';
+} from '@/decorators/req-params.decorator';
+import { Auth } from '@/processors/auth/auth.decorator';
+import { dev } from '@/processors/config/config.service';
+import { CommonException } from '@/processors/exception/common-exception';
+import { UtilsService } from '@/processors/utils/utils.service';
 import { AdminUserService } from './admin-user.service';
 import { AdminUserSignInDto, AdminUserUpdateDto } from './dto/admin-user.dto';
 

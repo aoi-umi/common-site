@@ -1,13 +1,14 @@
 import 'reflect-metadata';
 import { Sequelize } from 'sequelize-typescript';
+import '../moduleAlias';
 
-import { UtilsService } from 'src/processors/utils/utils.service';
-import { env } from 'src/processors/config/config.service';
+import { UtilsService } from '../processors/utils/utils.service';
+import { env } from '../processors/config/config.service';
 
-import { AdminUser } from 'src/modules/admin/admin-user/entities/admin-user.entity';
-import { SysRole } from 'src/modules/admin/sys-role/entities/sys-role.entity';
-import { SysRoleData } from 'src/modules/admin/sys-role/sys-role.constants';
-import { AdminUserRole } from 'src/modules/admin/admin-user/entities/admin-user-role.entity';
+import { AdminUser } from '../modules/admin/admin-user/entities/admin-user.entity';
+import { SysRole } from '../modules/admin/sys-role/entities/sys-role.entity';
+import { SysRoleData } from '../modules/admin/sys-role/sys-role.constants';
+import { AdminUserRole } from '../modules/admin/admin-user/entities/admin-user-role.entity';
 
 let db;
 (async () => {

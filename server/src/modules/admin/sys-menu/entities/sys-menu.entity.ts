@@ -10,7 +10,7 @@ import {
   BelongsTo,
   Index,
 } from 'sequelize-typescript';
-import { BaseEntity } from 'src/models/base.entity';
+import { BaseEntity } from '@/models/base.entity';
 import { SysPage } from '../../sys/entities/sys-page.entity';
 import { SysAuthority } from '../../sys-authority/entities/sys-authority.entity';
 

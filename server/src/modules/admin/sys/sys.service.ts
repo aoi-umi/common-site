@@ -6,9 +6,9 @@ import { isDefined } from 'class-validator';
 import { Model, ModelStatic } from 'sequelize-typescript';
 import { Router } from 'express';
 
-import { UtilsService } from 'src/processors/utils/utils.service';
-import { ConfigService } from 'src/processors/config/config.service';
-import { DbUtilsService } from 'src/processors/utils/db-utils.service';
+import { UtilsService } from '@/processors/utils/utils.service';
+import { ConfigService } from '@/processors/config/config.service';
+import { DbUtilsService } from '@/processors/utils/db-utils.service';
 
 import { SysMenuService } from '../sys-menu/sys-menu.service';
 import { SysMenu } from '../sys-menu/entities/sys-menu.entity';

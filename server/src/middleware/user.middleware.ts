@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import { AdminUserService } from 'src/modules/admin/admin-user/admin-user.service';
-import { dev } from 'src/processors/config/config.service';
+import { AdminUserService } from '@/modules/admin/admin-user/admin-user.service';
+import { dev } from '@/processors/config/config.service';
 
 @Injectable()
 export class UserMiddleware implements NestMiddleware {

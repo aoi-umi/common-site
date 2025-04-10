@@ -9,6 +9,7 @@ import * as morgan from 'morgan';
 import * as cookieParser from 'cookie-parser';
 import { Reflector } from '@nestjs/core';
 
+import './moduleAlias';
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './filters/all-exceptions.filter';
 import { HandlerAfterInterceptor } from './interceptor/handler-after.interceptor';

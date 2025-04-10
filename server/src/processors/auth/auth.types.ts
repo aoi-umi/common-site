@@ -1,4 +1,4 @@
-import { SignInAdminUser } from 'src/modules/admin/admin-user/admin-user.service';
+import { SignInAdminUser } from '@/modules/admin/admin-user/admin-user.service';
 
 export interface NormalUser {
   nickname: string;

@@ -5,9 +5,9 @@ import {
   IsArray,
   ValidateNested,
 } from 'class-validator';
-import { TrimOrNull } from 'src/decorators/transformer';
+import { TrimOrNull } from '@/decorators/transformer';
 
-import { FindOptionBaseDto } from 'src/models/query.dto';
+import { FindOptionBaseDto } from '@/models/query.dto';
 
 export class AdminUserSignInDto {
   @IsDefined()
