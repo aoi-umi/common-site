@@ -17,6 +17,7 @@ import {
 import { SysMenuAuthority } from './entities/sys-menu-authority.entity';
 import { SysMenuTree } from './entities/sys-menu-tree.entity';
 import { SysMenu } from './entities/sys-menu.entity';
+import { AdminUserAuthMap } from '../admin-user/entities/admin-user.entity';
 
 type MenuTreeItem = Partial<
   SysMenu & {
@@ -57,13 +58,17 @@ export class SysMenuService {
     };
   }
 
-  async getMenuTree(opt?: { forMain?: boolean }) {
+  async getMenuTree(opt?: { forMain?: boolean; auth?: AdminUserAuthMap }) {
     opt = {
       ...opt,
     };
     let menuWhere: any = {};
-    if (isDefined(opt.forMain)) {
+    let auth: string[] = null;
+    if (opt.forMain) {
       menuWhere.status = true;
+      if (opt.auth) {
+        auth = Object.keys(opt.auth);
+      }
     }
     let menuInsts = await this.sysMenuTreeRepo.findAll({
       include: [
@@ -77,12 +82,21 @@ export class SysMenuService {
       where: { distance: 1 },
       order: [['priority', 'ASC']],
     });
-    let treeOpt: any = { menu: menuInsts.map((ele) => ele.menu) };
+    let treeOpt: any = { menu: menuInsts.map((ele) => ele.menu), auth };
     if (opt.forMain) {
       treeOpt.noDisabledAuth = true;
     }
     await this.setData(treeOpt);
-    let menuData = menuInsts.map((ele) => ele.toJSON());
+    let menuData = menuInsts
+      .filter((ele) => {
+        if (auth) {
+          return ele.menu.authorityList.find((menuAuth) =>
+            auth.includes(menuAuth.name),
+          );
+        }
+        return true;
+      })
+      .map((ele) => ele.toJSON());
     let menuTree = this.genMenuTree(RootMenuId, menuData);
     return menuTree;
   }
@@ -94,15 +108,14 @@ export class SysMenuService {
     let menus = opt.menu instanceof Array ? opt.menu : [opt.menu];
     if (!menus.length) return;
     let ids = menus.map((ele) => ele.id);
-    let [data] = await this.dbUtilsSer.sequelize.query(
-      [
-        `select auth.*, menuAuth.menuId from ${this.sysAuthRepo.tableName} auth`,
-        `inner join ${this.sysMenuAuthRepo.tableName} menuAuth`,
-        `on menuAuth.menuId in (${ids.map(
-          (ele) => `'${ele}'`,
-        )}) and menuAuth.authorityId = auth.id`,
-      ].join('\r\n'),
-    );
+    let sqlStr = [
+      `select auth.*, menuAuth.menuId from ${this.sysAuthRepo.tableName} auth`,
+      `inner join ${this.sysMenuAuthRepo.tableName} menuAuth`,
+      `on menuAuth.menuId in (${ids.map(
+        (ele) => `'${ele}'`,
+      )}) and menuAuth.authorityId = auth.id`,
+    ].join('\r\n');
+    let [data] = await this.dbUtilsSer.sequelize.query(sqlStr);
     if (opt.noDisabledAuth) {
       data = data.filter((ele: any) => ele.status);
     }

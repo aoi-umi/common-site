@@ -44,7 +44,6 @@ export const tableExModel2Query = (opt: {
 }) => {
   let { model } = opt
   if (opt.refresh) model.page.index = 1
-  console.log(JSON.stringify(model.query))
   let newQuery = {}
   for (let key in model.query) {
     let v = model.query[key]

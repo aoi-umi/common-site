@@ -9,8 +9,10 @@ import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 
 import { SysApiService } from '@/modules/admin/sys-api/sys-api.service';
+import { SignInAdminUser } from '@/modules/admin/admin-user/admin-user.service';
 
 import * as authDeco from './auth.decorator';
+import { NormalUser } from './auth.types';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -26,7 +28,7 @@ export class AuthGuard implements CanActivate {
       ...auth,
     };
     let userAuthority;
-    let user;
+    let user: NormalUser | SignInAdminUser;
     if (request.isAdmin) {
       user = request.adminUser;
       userAuthority = user?.authority;
@@ -51,7 +53,7 @@ export class AuthGuard implements CanActivate {
     }
 
     if (!user) throw new UnauthorizedException();
-    if (user.isSysAdmin) return true;
+    if ((<SignInAdminUser>user).isSysAdmin) return true;
     let notPass = [];
     userAuthority = userAuthority || {};
     authorityList.forEach((auth) => {

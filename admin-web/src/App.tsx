@@ -282,7 +282,6 @@ export default class App extends Base {
   }
 
   renderMainConetnt() {
-    console.log(styles['main-content'])
     return (
       <div class={styles['main-content']}>
         {this.menuAuth.hasAuth ? (

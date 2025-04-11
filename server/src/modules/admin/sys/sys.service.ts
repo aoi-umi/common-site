@@ -22,6 +22,7 @@ import { SysPage } from './entities/sys-page.entity';
 import { SysMenuTree } from '../sys-menu/entities/sys-menu-tree.entity';
 import { SysMenuAuthority } from '../sys-menu/entities/sys-menu-authority.entity';
 import { SysApiAuthority } from '../sys-api/entities/sys-api-authority.entity';
+import { SignInAdminUser } from '../admin-user/admin-user.service';
 
 @Injectable()
 export class SysService {
@@ -312,8 +313,11 @@ export class SysService {
     return sql.join(os.EOL);
   }
 
-  async getData() {
-    let menuTree = await this.sysMenuSer.getMenuTree({ forMain: true });
+  async getData(user: SignInAdminUser) {
+    let menuTree = await this.sysMenuSer.getMenuTree({
+      forMain: true,
+      auth: user?.isSysAdmin ? null : user?.authority || {},
+    });
     return { menuTree };
   }
 
