@@ -19,11 +19,6 @@ import { OperateModel } from '@/utils'
 import { QueryOpEnum } from '@/models/enum'
 import { UserInfo } from '@/models/user'
 import {
-  AuthoritySelect,
-  AuthoritySelectDataType,
-  AuthoritySelectModel,
-} from '../comps/authority-select'
-import {
   RoleSelect,
   RoleSelectDataType,
   RoleSelectModel,
@@ -37,8 +32,7 @@ export class AdminUserMgt extends Base {
   $refs: {
     table: TableEx
     form: ElementUI.Form
-    authSelect: AuthoritySelect
-    roleSelect: AuthoritySelect
+    roleSelect: RoleSelect
   }
   op: OperateModel<{ op: string; data?: any }> = null
   loadedData: any = null
@@ -86,14 +80,6 @@ export class AdminUserMgt extends Base {
         render: (h, params) => {
           let data = params.row as AdminUserDataType
           return <RoleTags items={data.roleList}></RoleTags>
-        },
-      },
-      {
-        prop: 'authorityList',
-        label: '权限',
-        render: (h, params) => {
-          let data = params.row as AdminUserDataType
-          return <Tags items={data.authorityList}></Tags>
         },
       },
       {
@@ -171,7 +157,6 @@ export class AdminUserMgt extends Base {
       account: '',
       nickname: '',
       password: '',
-      authorityList: [],
       roleList: [],
     } as AdminUserDataType
   }
@@ -197,13 +182,6 @@ export class AdminUserMgt extends Base {
       this.formOpt.nickname.disabled = false
     }
 
-    this.authData.list = [
-      ...this.editingData.authorityList.map((ele) =>
-        AuthoritySelectModel.toTransferData(ele),
-      ),
-    ]
-    this.authData.value = this.authData.list.map((ele) => ele.key)
-
     this.roleData.list = [
       ...this.editingData.roleList.map((ele) =>
         RoleSelectModel.toTransferData(ele),
@@ -212,7 +190,6 @@ export class AdminUserMgt extends Base {
     this.roleData.value = this.roleData.list.map((ele) => ele.key)
 
     this.$refs.form?.resetFields()
-    this.$refs.authSelect?.reset()
     this.$refs.roleSelect?.reset()
     this.editDiaVisible = true
   }
@@ -222,12 +199,6 @@ export class AdminUserMgt extends Base {
     if (rs.success) this.runLoadData()
   }
   async save(data: AdminUserDataType) {
-    let authorityList = this.authData.list
-      .filter((ele) => this.authData.value.includes(ele.key))
-      .map((ele) => {
-        return { id: ele.data.id }
-      })
-    data.authorityList = authorityList
     let roleList = this.roleData.list
       .filter((ele) => this.roleData.value.includes(ele.key))
       .map((ele) => {
@@ -246,11 +217,6 @@ export class AdminUserMgt extends Base {
       data: { id: data.id, status: !data.status },
     })
     if (rs.success) this.runLoadData()
-  }
-
-  private authData: AuthoritySelectDataType = {
-    list: [],
-    value: [],
   }
 
   private roleData: RoleSelectDataType = {
@@ -295,13 +261,6 @@ export class AdminUserMgt extends Base {
               v-model={this.editingData.nickname}
               disabled={this.formOpt.nickname.disabled}
             />
-          </FormItem>
-          <br />
-          <FormItem label="权限" prop="authorityList">
-            <AuthoritySelect
-              ref="authSelect"
-              data={this.authData}
-            ></AuthoritySelect>
           </FormItem>
           <br />
           <FormItem label="角色" prop="roleList">

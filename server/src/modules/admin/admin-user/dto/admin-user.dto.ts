@@ -40,11 +40,6 @@ class AdminUserMgtSaveDto {
 
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => AdminUserAuthorityDto)
-  authorityList: AdminUserAuthorityDto[];
-
-  @IsArray()
-  @ValidateNested({ each: true })
   @Type(() => AdminUserRoleDto)
   roleList: AdminUserRoleDto[];
 }

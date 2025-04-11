@@ -47,9 +47,6 @@ export class AdminUser extends BaseEntity {
   changePwdAt: Date;
 
   @Column(DataType.VIRTUAL)
-  authorityList: SysAuthority[];
-
-  @Column(DataType.VIRTUAL)
   roleList: SysRole[];
 
   @Column(DataType.VIRTUAL)

@@ -107,9 +107,6 @@ export class AdminUserService {
       roleList = roleRs.rows;
     }
     users.forEach((user) => {
-      user.authorityList = auths
-        .filter((auth: any) => auth.userId === user.id)
-        .map((ele) => new this.sysAuthRepo(ele));
       let roleIds = roles
         .filter((role: any) => role.userId === user.id)
         .map((ele: any) => ele.id);
@@ -117,9 +114,6 @@ export class AdminUserService {
         return roleIds.includes(role.id);
       });
       let authority = {};
-      user.authorityList.forEach((auth) => {
-        authority[auth.name] = auth;
-      });
       user.roleList.forEach((role) => {
         role.authorityList.forEach((auth) => {
           authority[auth.name] = auth;
@@ -150,7 +144,6 @@ export class AdminUserService {
     await this.checkSaveData(dto, opt);
     let data: AdminUser;
     let updateData;
-    let authorityList = dto.authorityList || [];
     let roleList = dto.roleList || [];
     if (!opt.update) {
       data = new this.adminUserRepo(dto);
@@ -168,12 +161,6 @@ export class AdminUserService {
         if (isDefined(update[key])) updateData[key] = update[key];
       });
     }
-    let authSaveData = authorityList.map((ele) => {
-      return {
-        authorityId: ele.id,
-        userId: '',
-      };
-    });
     let roleSaveData = roleList.map((ele) => {
       return {
         roleId: ele.id,
@@ -195,14 +182,8 @@ export class AdminUserService {
           transaction,
         });
       }
-      authSaveData.forEach((ele) => {
-        ele.userId = data.id;
-      });
       roleSaveData.forEach((ele) => {
         ele.userId = data.id;
-      });
-      await this.adminUserAuthRepo.bulkCreate(authSaveData, {
-        transaction,
       });
       await this.adminUserRoleRepo.bulkCreate(roleSaveData, {
         transaction,

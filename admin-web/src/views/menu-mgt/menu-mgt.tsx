@@ -357,10 +357,14 @@ export class MenuMgt extends Base {
                 <FormItem label="启用状态" prop="status">
                   <Switch v-model={this.editingData.status}></Switch>
                 </FormItem>
-                <AuthoritySelect
-                  ref="authSelect"
-                  data={this.authData}
-                ></AuthoritySelect>
+
+                <br />
+                <FormItem label="权限">
+                  <AuthoritySelect
+                    ref="authSelect"
+                    data={this.authData}
+                  ></AuthoritySelect>
+                </FormItem>
               </Form>
             </div>
           )}
