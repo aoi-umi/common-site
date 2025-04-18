@@ -7,6 +7,7 @@ import store from './store'
 import { MainApi, MainMethod } from './api'
 import { apiConfig } from './config'
 import * as utils from './utils'
+import eventBus from './utils/event-bus'
 import './directive'
 
 import './assets/styles'
@@ -20,10 +21,12 @@ const mainApi = (Vue.prototype.$api = MainApi.create<MainMethod, MainApi>(
 ))
 
 Vue.prototype.$utils = utils
+Vue.prototype.$eventBus = eventBus
 declare module 'vue/types/vue' {
   interface Vue {
     $api: typeof mainApi
     $utils: typeof utils
+    $eventBus: typeof eventBus
   }
 }
 Vue.use(ElementUI, { size: 'mini' })

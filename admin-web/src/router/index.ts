@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 export const routes: Array<RouteConfig> = [
   {
     path: '/',
-    redirect: '/menuMgt',
+    // redirect: '/menuMgt',
   },
   {
     path: '/signIn',

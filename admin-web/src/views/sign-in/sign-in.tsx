@@ -53,7 +53,7 @@ export class SignInComp extends Vue<SignInCompProp, Base> {
     let reqData = LoginUser.createToken(data)
     let rs = await this.$api.adminUserSignIn(reqData)
     this.setUser(rs)
-    this.$emit('success')
+    this.$eventBus.$emit('signInSuccess')
   }
 
   data = {

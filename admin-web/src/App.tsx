@@ -43,6 +43,9 @@ export default class App extends Base {
     this.storeUser.setLogining(true)
     let user = await this.$api.adminUserInfo()
     this.setUser(user)
+    this.$eventBus.$on('signInSuccess', () => {
+      this.signInSuccess()
+    })
   }
 
   private get isDev() {
@@ -126,6 +129,12 @@ export default class App extends Base {
       signInShow: true,
     })
   }
+  async signInSuccess() {
+    this.storeSetting.setSetting({
+      signInShow: false,
+    })
+    await this.loadData()
+  }
 
   signOutClick() {
     this.op.run({ op: 'signOut' })
@@ -133,6 +142,8 @@ export default class App extends Base {
   async signOut() {
     await this.$api.adminUserSignOut()
     this.setUser(null)
+    this.menu = []
+    await this.loadData()
   }
   renderHeader() {
     return (
@@ -312,13 +323,7 @@ export default class App extends Base {
           }}
           width="400px"
         >
-          <SignInComp
-            on-success={() => {
-              this.storeSetting.setSetting({
-                signInShow: false,
-              })
-            }}
-          />
+          <SignInComp />
         </Dialog>
       </div>
     )
