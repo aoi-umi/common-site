@@ -13,7 +13,7 @@ export interface UserInfo {
   roleList?: RoleDataType[]
   authorityList?: AuthorityDataType[]
   allAuthorityList?: AuthorityDataType[]
-  authority?: { [key: string]: boolean }
+  authority?: string[]
 }
 
 export type LoginUserType = UserInfo & LoginUser
@@ -35,22 +35,12 @@ export class LoginUser {
     if (auth && !this.isSysAdmin) {
       const authList = auth instanceof Array ? auth : [auth]
       for (const ele of authList) {
-        if (!this.authority || !this.authority[ele]) {
+        if (!this.authority || !this.authority.includes(ele)) {
           return false
         }
       }
     }
     return true
-  }
-
-  existsAuth(this: LoginUserType, auth: string | string[]) {
-    const authList = auth instanceof Array ? auth : [auth]
-    for (const ele of authList) {
-      if (this.authority && this.authority[ele]) {
-        return true
-      }
-    }
-    return false
   }
 
   equalsId(this: LoginUserType, id: string) {

@@ -13,7 +13,6 @@ import {
 
 import { SysAuthority } from '../sys-authority/entities/sys-authority.entity';
 import { SysApi } from './entities/sys-api.entity';
-import { SysApiAuthority } from './entities/sys-api-authority.entity';
 import {
   SysApiDeleteDto,
   SysApiCreateDto,
@@ -29,8 +28,6 @@ export class SysApiService {
     private sysApiRepo: typeof SysApi,
     @InjectModel(SysAuthority)
     private sysAuthRepo: typeof SysAuthority,
-    @InjectModel(SysApiAuthority)
-    private sysApiAuthRepo: typeof SysApiAuthority,
   ) {}
 
   async findAll(opt?: FindManyOptions<SysApi>) {
@@ -60,20 +57,6 @@ export class SysApiService {
     let apis = opt.api instanceof Array ? opt.api : [opt.api];
     if (!apis.length) return;
     let apiIds = apis.map((ele) => ele.id);
-    let [data] = await this.dbUtilsSer.sequelize.query(
-      [
-        `select auth.*, apiAuth.apiId from ${this.sysAuthRepo.tableName} auth`,
-        `inner join ${this.sysApiAuthRepo.tableName} apiAuth`,
-        `on apiAuth.apiId in (${apiIds.map(
-          (ele) => `'${ele}'`,
-        )}) and apiAuth.authorityId = auth.id`,
-      ].join('\r\n'),
-    );
-    apis.forEach((api) => {
-      api.authorityList = data
-        .filter((auth: any) => auth.apiId === api.id)
-        .map((ele) => new this.sysAuthRepo(ele));
-    });
   }
   async create(dto: SysApiCreateDto) {
     let data = await this.save(dto, { update: false });
@@ -116,16 +99,9 @@ export class SysApiService {
         await data.save({ transaction });
       } else {
         await data.update(updateData, { transaction });
-        await this.sysApiAuthRepo.destroy({
-          where: { apiId: data.id },
-          transaction,
-        });
       }
       authSaveData.forEach((ele) => {
         ele.apiId = data.id;
-      });
-      await this.sysApiAuthRepo.bulkCreate(authSaveData, {
-        transaction,
       });
     });
     return this.findOne(data.id);
@@ -161,10 +137,6 @@ export class SysApiService {
     this.checkOperate(api);
     await this.dbUtilsSer.transaction(async (transaction) => {
       await api.destroy({ transaction });
-      await this.sysApiAuthRepo.destroy({
-        where: { apiId: api.id },
-        transaction,
-      });
     });
   }
 }

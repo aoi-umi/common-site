@@ -120,9 +120,9 @@ export class AdminUserService {
         });
       });
       user.allAuthorityList = Object.values(authority);
-      user.authority = {};
+      user.authority = [];
       user.allAuthorityList.forEach((auth) => {
-        if (auth.status) user.authority[auth.name] = true;
+        if (auth.status) user.authority.push(auth.name);
       });
     });
   }

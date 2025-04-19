@@ -17,7 +17,7 @@ import {
 import { SysMenuAuthority } from './entities/sys-menu-authority.entity';
 import { SysMenuTree } from './entities/sys-menu-tree.entity';
 import { SysMenu } from './entities/sys-menu.entity';
-import { AdminUserAuthMap } from '../admin-user/entities/admin-user.entity';
+import { AdminUserAuth } from '../admin-user/entities/admin-user.entity';
 
 type MenuTreeItem = Partial<
   SysMenu & {
@@ -58,7 +58,7 @@ export class SysMenuService {
     };
   }
 
-  async getMenuTree(opt?: { forMain?: boolean; auth?: AdminUserAuthMap }) {
+  async getMenuTree(opt?: { forMain?: boolean; auth?: AdminUserAuth }) {
     opt = {
       ...opt,
     };
@@ -67,7 +67,7 @@ export class SysMenuService {
     if (opt.forMain) {
       menuWhere.status = true;
       if (opt.auth) {
-        auth = Object.keys(opt.auth);
+        auth = opt.auth;
       }
     }
     let menuInsts = await this.sysMenuTreeRepo.findAll({

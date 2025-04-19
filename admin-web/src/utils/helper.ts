@@ -41,6 +41,7 @@ export const validateForm = (form: ElementUI.Form) => {
 export const tableExModel2Query = (opt: {
   model: TableExModel
   refresh?: boolean
+  noPage?: boolean
 }) => {
   let { model } = opt
   if (opt.refresh) model.page.index = 1
@@ -52,7 +53,7 @@ export const tableExModel2Query = (opt: {
   let query = {
     data: JSON.stringify({
       query: newQuery,
-      page: model.page,
+      page: opt.noPage ? undefined : model.page,
     }),
     _t: Date.now(),
   }

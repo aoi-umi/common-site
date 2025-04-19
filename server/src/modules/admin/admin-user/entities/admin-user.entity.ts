@@ -15,7 +15,7 @@ import { SysAuthority } from '../../sys-authority/entities/sys-authority.entity'
 import { SysRole } from '../../sys-role/entities/sys-role.entity';
 import { SysRoleData } from '../../sys-role/sys-role.constants';
 
-export type AdminUserAuthMap = { [key: string]: boolean };
+export type AdminUserAuth = string[];
 
 @Table({ tableName: 'admin_user' })
 export class AdminUser extends BaseEntity {
@@ -55,7 +55,7 @@ export class AdminUser extends BaseEntity {
   allAuthorityList: SysAuthority[];
 
   @Column(DataType.VIRTUAL)
-  authority: AdminUserAuthMap;
+  authority: AdminUserAuth;
 
   @Column(DataType.VIRTUAL)
   get isSysAdmin() {

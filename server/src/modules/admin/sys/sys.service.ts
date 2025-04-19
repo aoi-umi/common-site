@@ -21,7 +21,6 @@ import { SysGenerateScriptDto } from './dto/sys.dto';
 import { SysPage } from './entities/sys-page.entity';
 import { SysMenuTree } from '../sys-menu/entities/sys-menu-tree.entity';
 import { SysMenuAuthority } from '../sys-menu/entities/sys-menu-authority.entity';
-import { SysApiAuthority } from '../sys-api/entities/sys-api-authority.entity';
 import { SignInAdminUser } from '../admin-user/admin-user.service';
 
 @Injectable()
@@ -41,8 +40,6 @@ export class SysService {
     private sysMenuAuthRepo: typeof SysMenuAuthority,
     @InjectModel(SysApi)
     private sysApiRepo: typeof SysApi,
-    @InjectModel(SysApiAuthority)
-    private sysApiAuthRepo: typeof SysApiAuthority,
     @InjectModel(SysAuthority)
     private sysAuthRepo: typeof SysAuthority,
     @InjectModel(SysRole)
@@ -144,24 +141,6 @@ export class SysService {
       scripts.push(sql);
     }
 
-    let apiAuthList = await this.sysApiAuthRepo.findAll({
-      order: [
-        ['apiId', 'ASC'],
-        ['authorityId', 'ASC'],
-      ],
-    });
-    if (roleAuthList.length) {
-      let sql = apiAuthList.map((ele) => {
-        return this.getInsertOrUpdateScript({
-          data: ele.toJSON(),
-          resp: this.sysApiAuthRepo,
-          matchKey: ['apiId', 'authorityId'],
-          noUpdate: true,
-        });
-      });
-      scripts.push(`-- sysApiAuthority`);
-      scripts.push(sql);
-    }
     return {
       name: 'sys.sql',
       script: scripts,
@@ -316,7 +295,7 @@ export class SysService {
   async getData(user: SignInAdminUser) {
     let menuTree = await this.sysMenuSer.getMenuTree({
       forMain: true,
-      auth: user?.isSysAdmin ? null : user?.authority || {},
+      auth: user?.isSysAdmin ? null : user?.authority || [],
     });
     return { menuTree };
   }

@@ -7,15 +7,12 @@ import { DbUtilsService } from '@/processors/utils/db-utils.service';
 
 import { SysAuthority } from '../sys-authority/entities/sys-authority.entity';
 import { SysApi } from './entities/sys-api.entity';
-import { SysApiAuthority } from './entities/sys-api-authority.entity';
 
 import { SysApiService } from './sys-api.service';
 import { SysApiController } from './sys-api.controller';
 
 @Module({
-  imports: [
-    SequelizeModule.forFeature([SysApi, SysAuthority, SysApiAuthority]),
-  ],
+  imports: [SequelizeModule.forFeature([SysApi, SysAuthority])],
   controllers: [SysApiController],
   providers: [
     SequelizeModule,

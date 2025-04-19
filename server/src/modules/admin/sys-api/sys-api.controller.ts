@@ -7,6 +7,8 @@ import {
   Query,
   Param,
 } from '@nestjs/common';
+import { Request as ExpReq } from 'express';
+
 import { QueryHandlerPipe } from '@/pipes/query-handler.pipe';
 import { SysApiService } from './sys-api.service';
 import {
@@ -21,10 +23,33 @@ export class SysApiController {
 
   @Get()
   findAll(
+    @Request() req: ExpReq,
     @Query(new QueryHandlerPipe())
     dto: SysApiFindOptionDto,
   ) {
-    return this.apiSer.findAll(dto);
+    const router = req.app._router;
+    let routes: { path: string; method: string }[] = router.stack
+      .map((routeObj) => {
+        if (!routeObj.route) return;
+        const path = routeObj.route.path;
+        const method = routeObj.route.stack[0].method.toUpperCase();
+        return {
+          path,
+          method,
+          auth: `${path}_${method}`,
+        };
+      })
+      .filter((item) => item);
+    routes.sort((a, b) => a.path.localeCompare(b.path));
+    let path = dto.where?.path?.trim();
+    let method = dto.where?.method?.trim();
+    routes = routes.filter((ele) => {
+      return (
+        (!path || ele.path.toLowerCase().includes(path.toLowerCase())) &&
+        (!method || ele.method.toLowerCase().includes(method.toLowerCase()))
+      );
+    });
+    return { rows: routes };
   }
 
   @Get(':id')

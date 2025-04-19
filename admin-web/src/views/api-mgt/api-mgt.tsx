@@ -68,12 +68,8 @@ export class ApiMgt extends Base {
         label: 'method',
       },
       {
-        prop: 'authorityList',
+        prop: 'auth',
         label: '权限',
-        render: (h, params) => {
-          let data = params.row as ApiDataType
-          return <Tags items={data.authorityList}></Tags>
-        },
       },
       {
         prop: 'op',
@@ -86,20 +82,22 @@ export class ApiMgt extends Base {
             <div>
               <Buttons
                 defaultType="text"
-                items={[
-                  {
-                    label: '修改',
-                    click: () => {
-                      this.editClick(data)
-                    },
-                  },
-                  {
-                    label: '删除',
-                    click: () => {
-                      this.delClick(data)
-                    },
-                  },
-                ]}
+                items={
+                  [
+                    // {
+                    //   label: '修改',
+                    //   click: () => {
+                    //     this.editClick(data)
+                    //   },
+                    // },
+                    // {
+                    //   label: '删除',
+                    //   click: () => {
+                    //     this.delClick(data)
+                    //   },
+                    // },
+                  ]
+                }
               ></Buttons>
             </div>
           )
@@ -123,6 +121,7 @@ export class ApiMgt extends Base {
           ...this.$utils.tableExModel2Query({
             model,
             refresh: opt.refresh,
+            noPage: true,
           }),
         },
       }),
@@ -146,6 +145,7 @@ export class ApiMgt extends Base {
     let rs = await this.$api.sysApiQuery({
       ...data,
     })
+
     this.loadedData = rs
     return rs
   }
@@ -297,11 +297,6 @@ export class ApiMgt extends Base {
               click: () => {
                 this.toQuery({ refresh: true })
               },
-            },
-            {
-              name: 'add',
-              label: '添加',
-              click: this.addClick,
             },
           ]}
         ></TableEx>

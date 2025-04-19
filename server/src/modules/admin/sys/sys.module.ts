@@ -10,7 +10,6 @@ import { SysRole } from '../sys-role/entities/sys-role.entity';
 import { SysAuthority } from '../sys-authority/entities/sys-authority.entity';
 import { SysRoleAuthority } from '../sys-role/entities/sys-role-authority.entity';
 import { SysApi } from '../sys-api/entities/sys-api.entity';
-import { SysApiAuthority } from '../sys-api/entities/sys-api-authority.entity';
 
 import { SysPage } from './entities/sys-page.entity';
 import { SysService } from './sys.service';
@@ -24,7 +23,6 @@ import { SysController } from './sys.controller';
       SysAuthority,
       SysRoleAuthority,
       SysApi,
-      SysApiAuthority,
     ]),
     SysMenuModule,
   ],
