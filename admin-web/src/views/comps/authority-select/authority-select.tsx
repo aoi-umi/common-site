@@ -129,6 +129,15 @@ export class AuthoritySelect extends Vue<AuthoritySelectProp, Base> {
           titles={['移除', '已选择']}
           data={this.data.list}
           v-model={this.data.value}
+          scopedSlots={{
+            default: ({ option }) => {
+              return (
+                <el-tooltip content={option.label}>
+                  <span>{option.label}</span>
+                </el-tooltip>
+              )
+            },
+          }}
         ></Transfer>
       </div>
     )
