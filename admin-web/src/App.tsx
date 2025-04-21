@@ -148,7 +148,7 @@ export default class App extends Base {
   renderHeader() {
     return (
       <div class={styles['header']}>
-        <div>
+        <div class={styles['search']}>
           <Button
             icon={this.menuCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'}
             on-click={() => {
