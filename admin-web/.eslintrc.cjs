@@ -1,22 +1,29 @@
-module.exports = {
-  parser: 'vue-eslint-parser',
-  parserOptions: {
-    parser: '@typescript-eslint/parser',
-    // project: 'tsconfig.json',
-    sourceType: 'module',
-    ecmaVersion: 2020,
-  },
-  root: true,
+module.exports = module.exports = {
   env: {
+    browser: true,
+    es2021: true,
     node: true,
   },
-  plugins: ['@typescript-eslint/eslint-plugin', 'vue'],
   extends: [
+    'eslint:recommended',
+    'plugin:vue/vue3-essential',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
-
-  ignorePatterns: ['.eslintrc.js'],
+  overrides: [
+    {
+      extends: ['plugin:@typescript-eslint/disable-type-checked'],
+      files: ['./**/*.js'],
+    },
+  ],
+  parser: 'vue-eslint-parser',
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  plugins: ['vue'],
+  ignorePatterns: ['.eslintrc.cjs'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -30,4 +37,9 @@ module.exports = {
 
     'prefer-const': 'off',
   },
-}
+};
+
+
+
+
+

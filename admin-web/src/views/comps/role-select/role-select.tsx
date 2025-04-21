@@ -1,5 +1,5 @@
-import { Watch } from 'vue-property-decorator'
-import { TransferData } from 'element-ui/types/transfer'
+import { Watch } from 'vue-facing-decorator'
+import { TransferData } from 'element-plus/types/transfer'
 
 import { Component, Vue, Prop } from '@/components/decorator'
 import { Autocomplete, Transfer } from '@/components'

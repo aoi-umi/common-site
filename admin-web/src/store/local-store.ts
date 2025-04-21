@@ -4,7 +4,9 @@ export class LocalStore {
     if (![null, undefined].includes(v)) {
       try {
         v = JSON.parse(v)
-      } catch (e) {}
+      } catch (e) {
+        //
+      }
     }
     return v
   }

@@ -1,7 +1,6 @@
-import { Watch } from 'vue-property-decorator'
-import { TransferData } from 'element-ui/types/transfer'
+import { TransferDataItem } from 'element-plus'
 
-import { Component, Vue, Prop } from '@/components/decorator'
+import { Component, Prop, toNative } from '@/components/decorator'
 import { Autocomplete, Transfer } from '@/components'
 import { Base } from '@/views/base'
 import { AuthorityDataType } from '@/views/authority-mgt'
@@ -9,7 +8,7 @@ import { QueryOpEnum } from '@/models/enum'
 
 import styles from './index.module.less'
 
-export type AuthorityTransferData = TransferData & {
+export type AuthorityTransferData = TransferDataItem & {
   data: AuthorityDataType
 }
 
@@ -23,16 +22,11 @@ export type AuthoritySelectDataType = {
   value: string[]
 }
 
-class AuthoritySelectProp {
+@Component
+export class AuthoritySelect extends Base {
   @Prop()
   data: AuthoritySelectDataType
-}
 
-@Component({
-  props: AuthoritySelectProp,
-  extends: Base,
-})
-export class AuthoritySelect extends Vue<AuthoritySelectProp, Base> {
   private authQueryStr = ''
   private isAuthQueryClick = false
   private async authQuery(queryString: string, cb) {
@@ -143,3 +137,5 @@ export class AuthoritySelect extends Vue<AuthoritySelectProp, Base> {
     )
   }
 }
+
+export default toNative(AuthoritySelect)

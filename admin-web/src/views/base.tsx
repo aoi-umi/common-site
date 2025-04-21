@@ -1,20 +1,19 @@
-import { getModule } from 'vuex-module-decorators'
-import { RawLocation } from 'vue-router'
+import { RouteLocationRaw } from 'vue-router'
 
 import { BaseComp } from '@/components/base-comp'
 import { Component } from '@/components/decorator'
 import { UserInfo } from '@/models/user'
-import { LocalStore, SettingStore, LoginUserStore } from '@/store'
+import { LocalStore, useSettingStore, useUserStore } from '@/store'
 import { env } from '@/config'
 import { OperateModel, OperateOption } from '@/utils'
 
 @Component
 export class Base extends BaseComp {
   get storeUser() {
-    return getModule(LoginUserStore, this.$store)
+    return useUserStore()
   }
   get storeSetting() {
-    return getModule(SettingStore, this.$store)
+    return useSettingStore()
   }
 
   setUser(userInfo: UserInfo) {
@@ -40,7 +39,7 @@ export class Base extends BaseComp {
   }
 
   gotoPage(
-    location: RawLocation,
+    location: RouteLocationRaw,
     opt?: {
       mouseButton?: number
     },

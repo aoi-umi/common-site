@@ -1,4 +1,4 @@
-import ElementUI from 'element-ui'
+import ElementUI from 'element-plus'
 
 import { Button, Form, FormItem, Input } from '@/components'
 import { Component, Prop, Vue } from '@/components/decorator'

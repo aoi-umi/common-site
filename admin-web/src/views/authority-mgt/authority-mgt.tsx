@@ -1,6 +1,6 @@
-import ElementUI from 'element-ui'
+import ElementUI from 'element-plus'
 
-import { Watch } from 'vue-property-decorator'
+import { Watch } from 'vue-facing-decorator'
 import { Component, Confirm } from '@/components/decorator'
 import { Base } from '@/views/base'
 import {

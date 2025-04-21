@@ -1,182 +1,235 @@
-import * as _ElementUI from 'element-ui'
-import { InputType } from 'element-ui/types/input'
+import * as _ElementUI from 'element-plus'
 import { convClass } from './utils'
 
-export const Alert = convClass<_ElementUI.Alert, true>(_ElementUI.Alert)
-export const Aside = convClass<_ElementUI.Aside, true>(_ElementUI.Aside)
-export const Autocomplete = convClass<_ElementUI.Autocomplete, true>(
-  _ElementUI.Autocomplete,
+export const Alert = convClass<typeof _ElementUI.ElAlert, true>(
+  _ElementUI.ElAlert,
 )
-export const Badge = convClass<_ElementUI.Badge, true>(_ElementUI.Badge)
-export const Breadcrumb = convClass<_ElementUI.Breadcrumb, true>(
-  _ElementUI.Breadcrumb,
+export const Aside = convClass<typeof _ElementUI.ElAside, true>(
+  _ElementUI.ElAside,
 )
-export const BreadcrumbItem = convClass<_ElementUI.BreadcrumbItem, true>(
-  _ElementUI.BreadcrumbItem,
+export const Autocomplete = convClass<typeof _ElementUI.ElAutocomplete, true>(
+  _ElementUI.ElAutocomplete,
 )
-export const Button = convClass<_ElementUI.Button, true>(_ElementUI.Button)
-export const ButtonGroup = convClass<_ElementUI.ButtonGroup, true>(
-  _ElementUI.ButtonGroup,
+export const Badge = convClass<typeof _ElementUI.ElBadge, true>(
+  _ElementUI.ElBadge,
 )
-export const Card = convClass<_ElementUI.Card, true>(_ElementUI.Card)
-export const Cascader = convClass<_ElementUI.Cascader, true>(
-  _ElementUI.Cascader,
+export const Breadcrumb = convClass<typeof _ElementUI.ElBreadcrumb, true>(
+  _ElementUI.ElBreadcrumb,
 )
-export const Carousel = convClass<_ElementUI.Carousel, true>(
-  _ElementUI.Carousel,
+export const BreadcrumbItem = convClass<
+  typeof _ElementUI.ElBreadcrumbItem,
+  true
+>(_ElementUI.ElBreadcrumbItem)
+export const Button = convClass<typeof _ElementUI.ElButton, true>(
+  _ElementUI.ElButton,
 )
-export const CarouselItem = convClass<_ElementUI.CarouselItem, true>(
-  _ElementUI.CarouselItem,
+export const ButtonGroup = convClass<typeof _ElementUI.ElButtonGroup, true>(
+  _ElementUI.ElButtonGroup,
 )
-export const Checkbox = convClass<_ElementUI.Checkbox, true>(
-  _ElementUI.Checkbox,
+export const Card = convClass<typeof _ElementUI.ElCard, true>(_ElementUI.ElCard)
+export const Cascader = convClass<typeof _ElementUI.ElCascader, true>(
+  _ElementUI.ElCascader,
 )
-export const CheckboxButton = convClass<_ElementUI.CheckboxButton, true>(
-  _ElementUI.CheckboxButton,
+export const Carousel = convClass<typeof _ElementUI.ElCarousel, true>(
+  _ElementUI.ElCarousel,
 )
-export const CheckboxGroup = convClass<_ElementUI.CheckboxGroup, true>(
-  _ElementUI.CheckboxGroup,
+export const CarouselItem = convClass<typeof _ElementUI.ElCarouselItem, true>(
+  _ElementUI.ElCarouselItem,
 )
-export const Col = convClass<_ElementUI.Col, true>(_ElementUI.Col)
-export const Collapse = convClass<_ElementUI.Collapse, true>(
-  _ElementUI.Collapse,
+export const Checkbox = convClass<typeof _ElementUI.ElCheckbox, true>(
+  _ElementUI.ElCheckbox,
 )
-export const CollapseItem = convClass<_ElementUI.CollapseItem, true>(
-  _ElementUI.CollapseItem,
+export const CheckboxButton = convClass<
+  typeof _ElementUI.ElCheckboxButton,
+  true
+>(_ElementUI.ElCheckboxButton)
+export const CheckboxGroup = convClass<typeof _ElementUI.ElCheckboxGroup, true>(
+  _ElementUI.ElCheckboxGroup,
 )
-export const ColorPicker = convClass<_ElementUI.ColorPicker, true>(
-  _ElementUI.ColorPicker,
+export const Col = convClass<typeof _ElementUI.ElCol, true>(_ElementUI.ElCol)
+export const Collapse = convClass<typeof _ElementUI.ElCollapse, true>(
+  _ElementUI.ElCollapse,
 )
-export const Container = convClass<_ElementUI.Container, true>(
-  _ElementUI.Container,
+export const CollapseItem = convClass<typeof _ElementUI.ElCollapseItem, true>(
+  _ElementUI.ElCollapseItem,
 )
-export const DatePicker = convClass<_ElementUI.DatePicker, true>(
-  _ElementUI.DatePicker,
+export const ColorPicker = convClass<typeof _ElementUI.ElColorPicker, true>(
+  _ElementUI.ElColorPicker,
+)
+export const Container = convClass<typeof _ElementUI.ElContainer, true>(
+  _ElementUI.ElContainer,
+)
+export const DatePicker = convClass<typeof _ElementUI.ElDatePicker, true>(
+  _ElementUI.ElDatePicker,
 )
 export const Dialog = convClass<
-  _ElementUI.Dialog & {
+  typeof _ElementUI.ElDialog & {
     visible: boolean
     appendToBody: boolean
   },
   true
->(_ElementUI.Dialog)
-export const Dropdown = convClass<_ElementUI.Dropdown, true>(
-  _ElementUI.Dropdown,
+>(_ElementUI.ElDialog)
+export const Dropdown = convClass<typeof _ElementUI.ElDropdown, true>(
+  _ElementUI.ElDropdown,
 )
-export const DropdownItem = convClass<_ElementUI.DropdownItem, true>(
-  _ElementUI.DropdownItem,
+export const DropdownItem = convClass<typeof _ElementUI.ElDropdownItem, true>(
+  _ElementUI.ElDropdownItem,
 )
-export const DropdownMenu = convClass<_ElementUI.DropdownMenu, true>(
-  _ElementUI.DropdownMenu,
+export const DropdownMenu = convClass<typeof _ElementUI.ElDropdownMenu, true>(
+  _ElementUI.ElDropdownMenu,
 )
-export const Footer = convClass<_ElementUI.Footer, true>(_ElementUI.Footer)
-export const Form = convClass<_ElementUI.Form, true>(_ElementUI.Form)
-export const FormItem = convClass<_ElementUI.FormItem, true>(
-  _ElementUI.FormItem,
+export const Footer = convClass<typeof _ElementUI.ElFooter, true>(
+  _ElementUI.ElFooter,
 )
-export const Header = convClass<_ElementUI.Header, true>(_ElementUI.Header)
-export const Input = convClass<_ElementUI.Input, true>(_ElementUI.Input)
-export const InputNumber = convClass<_ElementUI.InputNumber, true>(
-  _ElementUI.InputNumber,
+export const Form = convClass<typeof _ElementUI.ElForm, true>(_ElementUI.ElForm)
+export const FormItem = convClass<typeof _ElementUI.ElFormItem, true>(
+  _ElementUI.ElFormItem,
 )
-export const Main = convClass<_ElementUI.Main, true>(_ElementUI.Main)
-export const Menu = convClass<_ElementUI.Menu, true>(_ElementUI.Menu)
-export const MenuItem = convClass<_ElementUI.MenuItem, true>(
-  _ElementUI.MenuItem,
+export const Header = convClass<typeof _ElementUI.ElHeader, true>(
+  _ElementUI.ElHeader,
 )
-export const MenuItemGroup = convClass<_ElementUI.MenuItemGroup, true>(
-  _ElementUI.MenuItemGroup,
+export const Input = convClass<typeof _ElementUI.ElInput, true>(
+  _ElementUI.ElInput,
 )
-export const Option = convClass<_ElementUI.Option, true>(_ElementUI.Option)
-export const OptionGroup = convClass<_ElementUI.OptionGroup, true>(
-  _ElementUI.OptionGroup,
+export const InputNumber = convClass<typeof _ElementUI.ElInputNumber, true>(
+  _ElementUI.ElInputNumber,
+)
+export const Main = convClass<typeof _ElementUI.ElMain, true>(_ElementUI.ElMain)
+export const Menu = convClass<typeof _ElementUI.ElMenu, true>(_ElementUI.ElMenu)
+export const MenuItem = convClass<typeof _ElementUI.ElMenuItem, true>(
+  _ElementUI.ElMenuItem,
+)
+export const MenuItemGroup = convClass<typeof _ElementUI.ElMenuItemGroup, true>(
+  _ElementUI.ElMenuItemGroup,
+)
+export const Option = convClass<typeof _ElementUI.ElOption, true>(
+  _ElementUI.ElOption,
+)
+export const OptionGroup = convClass<typeof _ElementUI.ElOptionGroup, true>(
+  _ElementUI.ElOptionGroup,
 )
 export const Pagination = convClass<
-  _ElementUI.Pagination & {
+  typeof _ElementUI.ElPagination & {
     background: boolean
   },
   true
->(_ElementUI.Pagination)
-export const Popover = convClass<_ElementUI.Popover, true>(_ElementUI.Popover)
-export const Progress = convClass<_ElementUI.Progress, true>(
-  _ElementUI.Progress,
+>(_ElementUI.ElPagination)
+export const Popover = convClass<typeof _ElementUI.ElPopover, true>(
+  _ElementUI.ElPopover,
 )
-export const Rate = convClass<_ElementUI.Rate, true>(_ElementUI.Rate)
-export const Radio = convClass<_ElementUI.Radio, true>(_ElementUI.Radio)
-export const RadioButton = convClass<_ElementUI.RadioButton, true>(
-  _ElementUI.RadioButton,
+export const Progress = convClass<typeof _ElementUI.ElProgress, true>(
+  _ElementUI.ElProgress,
 )
-export const RadioGroup = convClass<_ElementUI.RadioGroup, true>(
-  _ElementUI.RadioGroup,
+export const Rate = convClass<typeof _ElementUI.ElRate, true>(_ElementUI.ElRate)
+export const Radio = convClass<typeof _ElementUI.ElRadio, true>(
+  _ElementUI.ElRadio,
 )
-export const Row = convClass<_ElementUI.Row, true>(_ElementUI.Row)
-export const Select = convClass<_ElementUI.Select, true>(_ElementUI.Select)
-export const Slider = convClass<_ElementUI.Slider, true>(_ElementUI.Slider)
-export const Step = convClass<_ElementUI.Step, true>(_ElementUI.Step)
-export const Steps = convClass<_ElementUI.Steps, true>(_ElementUI.Steps)
-export const Submenu = convClass<_ElementUI.Submenu, true>(_ElementUI.Submenu)
-export const Switch = convClass<_ElementUI.Switch, true>(_ElementUI.Switch)
-export const Table = convClass<_ElementUI.Table, true>(_ElementUI.Table)
-export const TableColumn = convClass<_ElementUI.TableColumn, true>(
-  _ElementUI.TableColumn,
+export const RadioButton = convClass<typeof _ElementUI.ElRadioButton, true>(
+  _ElementUI.ElRadioButton,
 )
-export const Tabs = convClass<_ElementUI.Tabs, true>(_ElementUI.Tabs)
-export const TabPane = convClass<_ElementUI.TabPane, true>(_ElementUI.TabPane)
+export const RadioGroup = convClass<typeof _ElementUI.ElRadioGroup, true>(
+  _ElementUI.ElRadioGroup,
+)
+export const Row = convClass<typeof _ElementUI.ElRow, true>(_ElementUI.ElRow)
+export const Select = convClass<typeof _ElementUI.ElSelect, true>(
+  _ElementUI.ElSelect,
+)
+export const Slider = convClass<typeof _ElementUI.ElSlider, true>(
+  _ElementUI.ElSlider,
+)
+export const Step = convClass<typeof _ElementUI.ElStep, true>(_ElementUI.ElStep)
+export const Steps = convClass<typeof _ElementUI.ElSteps, true>(
+  _ElementUI.ElSteps,
+)
+export const Submenu = convClass<typeof _ElementUI.ElSubMenu, true>(
+  _ElementUI.ElSubMenu,
+)
+export const Switch = convClass<typeof _ElementUI.ElSwitch, true>(
+  _ElementUI.ElSwitch,
+)
+export const Table = convClass<typeof _ElementUI.ElTable, true>(
+  _ElementUI.ElTable,
+)
+export const TableColumn = convClass<typeof _ElementUI.ElTableColumn, true>(
+  _ElementUI.ElTableColumn,
+)
+export const Tabs = convClass<typeof _ElementUI.ElTabs, true>(_ElementUI.ElTabs)
+export const TabPane = convClass<typeof _ElementUI.ElTabPane, true>(
+  _ElementUI.ElTabPane,
+)
 export const Tag = convClass<
-  _ElementUI.Tag & {
+  typeof _ElementUI.ElTag & {
     type: any
   },
   true
->(_ElementUI.Tag)
-export const Timeline = convClass<_ElementUI.Timeline, true>(
-  _ElementUI.Timeline,
+>(_ElementUI.ElTag)
+export const Timeline = convClass<typeof _ElementUI.ElTimeline, true>(
+  _ElementUI.ElTimeline,
 )
-export const TimelineItem = convClass<_ElementUI.TimelineItem, true>(
-  _ElementUI.TimelineItem,
+export const TimelineItem = convClass<typeof _ElementUI.ElTimelineItem, true>(
+  _ElementUI.ElTimelineItem,
 )
-export const TimePicker = convClass<_ElementUI.TimePicker, true>(
-  _ElementUI.TimePicker,
+export const TimePicker = convClass<typeof _ElementUI.ElTimePicker, true>(
+  _ElementUI.ElTimePicker,
 )
-export const TimeSelect = convClass<_ElementUI.TimeSelect, true>(
-  _ElementUI.TimeSelect,
+export const TimeSelect = convClass<typeof _ElementUI.ElTimeSelect, true>(
+  _ElementUI.ElTimeSelect,
 )
-export const Tooltip = convClass<_ElementUI.Tooltip, true>(_ElementUI.Tooltip)
-export const Transfer = convClass<_ElementUI.Transfer, true>(
-  _ElementUI.Transfer,
+export const Tooltip = convClass<typeof _ElementUI.ElTooltip, true>(
+  _ElementUI.ElTooltip,
 )
-export const Tree = convClass<_ElementUI.Tree, true>(_ElementUI.Tree)
-export const Upload = convClass<_ElementUI.Upload, true>(_ElementUI.Upload)
-export const Divider = convClass<_ElementUI.Divider, true>(_ElementUI.Divider)
-export const Link = convClass<_ElementUI.Link, true>(_ElementUI.Link)
-export const Image = convClass<_ElementUI.Image, true>(_ElementUI.Image)
-export const Icon = convClass<_ElementUI.Icon, true>(_ElementUI.Icon)
-export const Calendar = convClass<_ElementUI.Calendar, true>(
-  _ElementUI.Calendar,
+export const Transfer = convClass<typeof _ElementUI.ElTransfer, true>(
+  _ElementUI.ElTransfer,
 )
-export const Backtop = convClass<_ElementUI.Backtop, true>(_ElementUI.Backtop)
-export const PageHeader = convClass<_ElementUI.PageHeader, true>(
-  _ElementUI.PageHeader,
+export const Tree = convClass<typeof _ElementUI.ElTree, true>(_ElementUI.ElTree)
+export const Upload = convClass<typeof _ElementUI.ElUpload, true>(
+  _ElementUI.ElUpload,
 )
-export const Avatar = convClass<_ElementUI.Avatar, true>(_ElementUI.Avatar)
-export const Drawer = convClass<_ElementUI.Drawer, true>(_ElementUI.Drawer)
-export const Popconfirm = convClass<_ElementUI.Popconfirm, true>(
-  _ElementUI.Popconfirm,
+export const Divider = convClass<typeof _ElementUI.ElDivider, true>(
+  _ElementUI.ElDivider,
 )
-export const Skeleton = convClass<_ElementUI.Skeleton, true>(
-  _ElementUI.Skeleton,
+export const Link = convClass<typeof _ElementUI.ElLink, true>(_ElementUI.ElLink)
+export const Image = convClass<typeof _ElementUI.ElImage, true>(
+  _ElementUI.ElImage,
 )
-export const SkeletonItem = convClass<_ElementUI.SkeletonItem, true>(
-  _ElementUI.SkeletonItem,
+export const Icon = convClass<typeof _ElementUI.ElIcon, true>(_ElementUI.ElIcon)
+export const Calendar = convClass<typeof _ElementUI.ElCalendar, true>(
+  _ElementUI.ElCalendar,
 )
-export const CascaderPanel = convClass<_ElementUI.CascaderPanel, true>(
-  _ElementUI.CascaderPanel,
+export const Backtop = convClass<typeof _ElementUI.ElBacktop, true>(
+  _ElementUI.ElBacktop,
 )
-export const Empty = convClass<_ElementUI.Empty, true>(_ElementUI.Empty)
-export const Spinner = convClass<_ElementUI.Spinner, true>(_ElementUI.Spinner)
-export const Descriptions = convClass<_ElementUI.Descriptions, true>(
-  _ElementUI.Descriptions,
+export const PageHeader = convClass<typeof _ElementUI.ElPageHeader, true>(
+  _ElementUI.ElPageHeader,
 )
-export const DescriptionsItem = convClass<_ElementUI.DescriptionsItem, true>(
-  _ElementUI.DescriptionsItem,
+export const Avatar = convClass<typeof _ElementUI.ElAvatar, true>(
+  _ElementUI.ElAvatar,
 )
-export const Result = convClass<_ElementUI.Result, true>(_ElementUI.Result)
+export const Drawer = convClass<typeof _ElementUI.ElDrawer, true>(
+  _ElementUI.ElDrawer,
+)
+export const Popconfirm = convClass<typeof _ElementUI.ElPopconfirm, true>(
+  _ElementUI.ElPopconfirm,
+)
+export const Skeleton = convClass<typeof _ElementUI.ElSkeleton, true>(
+  _ElementUI.ElSkeleton,
+)
+export const SkeletonItem = convClass<typeof _ElementUI.ElSkeletonItem, true>(
+  _ElementUI.ElSkeletonItem,
+)
+export const CascaderPanel = convClass<typeof _ElementUI.ElCascaderPanel, true>(
+  _ElementUI.ElCascaderPanel,
+)
+export const Empty = convClass<typeof _ElementUI.ElEmpty, true>(
+  _ElementUI.ElEmpty,
+)
+export const Descriptions = convClass<typeof _ElementUI.ElDescriptions, true>(
+  _ElementUI.ElDescriptions,
+)
+export const DescriptionsItem = convClass<
+  typeof _ElementUI.ElDescriptionsItem,
+  true
+>(_ElementUI.ElDescriptionsItem)
+export const Result = convClass<typeof _ElementUI.ElResult, true>(
+  _ElementUI.ElResult,
+)

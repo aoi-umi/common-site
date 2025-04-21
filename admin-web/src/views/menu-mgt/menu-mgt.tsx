@@ -1,4 +1,4 @@
-import ElementUI from 'element-ui'
+import ElementUI from 'element-plus'
 
 import { Component, Confirm } from '@/components/decorator'
 import { Base } from '@/views/base'
@@ -32,7 +32,7 @@ import styles from './index.module.less'
 export type MenuType = {
   id?: string
   pageName?: string
-  text?: string
+  text?: string | unknown
   name?: string
   icon?: string
   status?: boolean

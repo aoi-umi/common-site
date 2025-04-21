@@ -1,6 +1,6 @@
-import { Component } from '@/components/decorator'
+import { Component, toNative } from '@/components/decorator'
 import { Base } from '@/views/base'
-import { Watch } from 'vue-property-decorator'
+import { Watch } from 'vue-facing-decorator'
 
 import {
   Button,
@@ -26,7 +26,7 @@ type MainMenuType = MenuType & {
   path?: string
 }
 @Component
-export default class App extends Base {
+class App extends Base {
   menu: MainMenuType[] = []
   op: OperateModel<{ op: string }>
   created() {
@@ -329,3 +329,5 @@ export default class App extends Base {
     )
   }
 }
+
+export default toNative(App)

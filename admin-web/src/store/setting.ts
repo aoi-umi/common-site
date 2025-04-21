@@ -1,18 +1,18 @@
-import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
+import { defineStore } from 'pinia'
 
 type SettingType = {
   signInShow: boolean
 }
 
-@Module({ name: 'setting' })
-export class SettingStore extends VuexModule {
-  setting: SettingType = { signInShow: false }
-
-  @Mutation
-  setSetting(setting: Partial<SettingType>) {
-    this.setting = {
-      ...this.setting,
-      ...setting,
-    }
-  }
-}
+export const useSettingStore = defineStore('setting', {
+  state: () => ({ setting: { signInShow: false } as SettingType }),
+  getters: {},
+  actions: {
+    setSetting(setting: Partial<SettingType>) {
+      this.setting = {
+        ...this.setting,
+        ...setting,
+      }
+    },
+  },
+})

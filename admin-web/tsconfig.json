@@ -13,20 +13,11 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "baseUrl": ".",
-    "types": [
-      "webpack-env"
-    ],
+    "types": ["node", "element-plus/global.d.ts"],
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ],
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
@@ -38,9 +29,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx",
+    "tests/**/*.tsx"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

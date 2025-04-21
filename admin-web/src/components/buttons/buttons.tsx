@@ -1,6 +1,5 @@
-import { Watch } from 'vue-property-decorator'
 
-import { Component, Vue, Prop } from '@/components/decorator'
+import { Component, Vue, Prop, toNative } from '@/components/decorator'
 
 import { Button } from '../ui'
 
@@ -11,18 +10,14 @@ export type ButtonItem = {
   click?: (opt?: { item: ButtonItem }) => any
 }
 
-class ButtonsProp {
+@Component
+export class Buttons extends Vue {
   @Prop()
   defaultType?: string
 
   @Prop()
   items: ButtonItem[]
-}
 
-@Component({
-  props: ButtonsProp,
-})
-export class Buttons extends Vue<ButtonsProp> {
   render() {
     return (
       <div>
@@ -47,3 +42,5 @@ export class Buttons extends Vue<ButtonsProp> {
     )
   }
 }
+
+export default toNative(Buttons)

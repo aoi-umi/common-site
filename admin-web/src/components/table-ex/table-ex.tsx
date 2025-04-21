@@ -1,9 +1,9 @@
-import { Watch } from 'vue-property-decorator'
-import ElementUI from 'element-ui'
+import { Watch } from 'vue-facing-decorator'
+import * as ElementUI from 'element-plus'
 import {
   TableColumnFixedType,
   TableColumnType,
-} from 'element-ui/types/table-column'
+} from 'element-plus/types/table-column'
 
 import { Component, Vue, Prop } from '@/components/decorator'
 import { OperateModel } from '@/utils'
@@ -39,7 +39,7 @@ export type TableExQueryFieldProp = TableExQuery & {}
 
 class TableExProp {
   @Prop()
-  tableProps?: Partial<ElementUI.Table>
+  tableProps?: Partial<ElementUI.Table<{}>>
 
   @Prop()
   columns?: TableExColumnProp[]

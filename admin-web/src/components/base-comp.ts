@@ -1,4 +1,4 @@
-import { Component, Vue } from './decorator'
+import { Component, Vue, toNative } from './decorator'
 
 @Component
 export class BaseComp extends Vue {

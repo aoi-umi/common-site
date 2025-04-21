@@ -1,4 +1,4 @@
-import { Component, Prop, Vue } from '@/components/decorator'
+import { Component, Prop, toNative } from '@/components/decorator'
 import { Base } from '@/views/base'
 import { Button, Input, Avatar, Popover } from '@/components'
 import { OperateModel } from '@/utils'
@@ -6,16 +6,11 @@ import { UserInfo } from '@/models/user'
 
 import styles from './avatar.module.less'
 
-class UserAvatarProp {
+@Component
+export class UserAvatarComp extends Base {
   @Prop()
   user: UserInfo
-}
 
-@Component({
-  extends: Base,
-  props: UserAvatarProp,
-})
-export class UserAvatar extends Vue<UserAvatarProp, Base> {
   op: OperateModel<{ op: string }>
   created() {
     this.op = this.getOpModel({
@@ -38,3 +33,5 @@ export class UserAvatar extends Vue<UserAvatarProp, Base> {
     )
   }
 }
+
+export const UserAvatar = toNative(UserAvatarComp)

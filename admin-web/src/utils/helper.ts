@@ -1,6 +1,6 @@
 import SparkMD5 from 'spark-md5'
 import * as FileSaver from 'file-saver'
-import ElementUI from 'element-ui'
+import * as ElementUI from 'element-plus'
 import { defer } from './common'
 import { TableExModel } from '@/components/table-ex/model'
 import { QueryOpEnum } from '@/models/enum'
@@ -14,7 +14,7 @@ export const saveFile = (data, name?) => {
   FileSaver.saveAs(data, name)
 }
 
-export const validateForm = (form: ElementUI.Form) => {
+export const validateForm = (form: typeof ElementUI.ElForm) => {
   let def = defer()
   form.validate((isValid: boolean, invalidFields) => {
     if (!isValid) {

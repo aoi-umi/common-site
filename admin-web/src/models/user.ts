@@ -1,7 +1,7 @@
-import * as stringify from 'json-stable-stringify'
+import stringify from 'json-stable-stringify'
 import * as utils from '@/utils'
-import { AuthorityDataType } from '@/views/authority-mgt'
-import { RoleDataType } from '@/views/role-mgt'
+// import { AuthorityDataType } from '@/views/authority-mgt'
+// import { RoleDataType } from '@/views/role-mgt'
 
 export interface UserInfo {
   id?: string
@@ -10,9 +10,9 @@ export interface UserInfo {
   authToken?: string
   avatarUrl?: string
   isSysAdmin?: boolean
-  roleList?: RoleDataType[]
-  authorityList?: AuthorityDataType[]
-  allAuthorityList?: AuthorityDataType[]
+  // roleList?: RoleDataType[]
+  // authorityList?: AuthorityDataType[]
+  // allAuthorityList?: AuthorityDataType[]
   authority?: string[]
 }
 
@@ -27,6 +27,7 @@ export class LoginUser {
       }
       user.isLogin = true
     } else {
+      //
     }
     return user as LoginUserType
   }

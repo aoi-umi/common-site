@@ -1,5 +1,5 @@
-import Vue from 'vue'
-const vm = Vue.prototype as Vue
+import { getCurrentInstance } from 'vue'
+const vm = getCurrentInstance()?.proxy
 export type OperateOption<T = any> = {
   prefix?: string
   fn: (args?: T) => any

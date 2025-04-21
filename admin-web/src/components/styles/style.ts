@@ -1,2 +1,2 @@
 import './style.less'
-import './element-ui.less'
+import './element-plus.less'

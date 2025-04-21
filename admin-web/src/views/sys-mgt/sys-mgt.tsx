@@ -1,4 +1,4 @@
-import { Component } from '@/components/decorator'
+import { Component, toNative } from '@/components/decorator'
 import { Base } from '@/views/base'
 import { Button, Input } from '@/components'
 import { routes } from '@/router'
@@ -29,7 +29,7 @@ export class SysMgt extends Base {
       .map((ele) => {
         return {
           path: ele.path,
-          name: ele.meta?.name || '',
+          name: (ele.meta?.name || '') as string,
           text: ele.meta?.text || '',
         }
       })
@@ -68,3 +68,5 @@ export class SysMgt extends Base {
     )
   }
 }
+
+export default toNative(SysMgt)

@@ -1,6 +1,6 @@
-import Vue from 'vue'
-const vm = Vue.prototype as Vue
-export const Confirm = function <T extends Vue>(
+import { getCurrentInstance } from 'vue'
+const vm = getCurrentInstance()?.proxy
+export const Confirm = function <T extends {}>(
   message: string | ((this: T, fnArgs: any[]) => any),
   opt?: { title?: string },
 ) {
