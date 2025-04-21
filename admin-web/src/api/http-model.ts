@@ -96,7 +96,7 @@ export class ApiModel<T> {
       ...req.userOptions,
     }
     let required = []
-    let newUrl = req.url.replace(/\/:([^\/]+)/g, (...args) => {
+    let newUrl = req.url.replace(/\/:([^/]+)/g, (...args) => {
       let v = (userOptions.params && userOptions.params[args[1]]) ?? ''
       if (v === '') required.push(args[1])
       return `/${v}`

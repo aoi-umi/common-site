@@ -1,4 +1,3 @@
-
 import { Component, Vue, Prop, toNative } from '@/components/decorator'
 
 import { Button } from '../ui'
