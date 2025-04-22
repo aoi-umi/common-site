@@ -329,5 +329,3 @@ class App extends Base {
     )
   }
 }
-
-export default toNative(App)

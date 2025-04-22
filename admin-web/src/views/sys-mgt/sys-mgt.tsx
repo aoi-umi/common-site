@@ -1,4 +1,4 @@
-import { Component, toNative } from '@/components/decorator'
+import { Component } from '@/components/decorator'
 import { Base } from '@/views/base'
 import { Button, Input } from '@/components'
 import { routes } from '@/router'
@@ -68,5 +68,3 @@ export class SysMgt extends Base {
     )
   }
 }
-
-export default toNative(SysMgt)

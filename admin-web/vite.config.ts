@@ -12,7 +12,10 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx({
-      babelPlugins: [['@babel/plugin-proposal-decorators', { legacy: true }]],
+      babelPlugins: [
+        ['@babel/plugin-proposal-decorators', { legacy: true }],
+        ['@babel/plugin-transform-class-properties', { loose: true }],
+      ],
     }),
   ],
   resolve: {

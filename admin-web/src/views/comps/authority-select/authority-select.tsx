@@ -1,6 +1,6 @@
 import { TransferDataItem } from 'element-plus'
 
-import { Component, Prop, toNative } from '@/components/decorator'
+import { Component, Prop } from '@/components/decorator'
 import { Autocomplete, Transfer } from '@/components'
 import { Base } from '@/views/base'
 import { AuthorityDataType } from '@/views/authority-mgt'
@@ -137,5 +137,3 @@ export class AuthoritySelect extends Base {
     )
   }
 }
-
-export default toNative(AuthoritySelect)

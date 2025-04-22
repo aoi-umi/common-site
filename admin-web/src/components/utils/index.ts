@@ -1,4 +1,3 @@
-import * as decorator from '../decorator'
 export function convClass<prop, partial extends boolean = false, U = {}>(t: U) {
   type P = partial extends false ? prop : Partial<prop>
   return t as any as {
@@ -13,8 +12,6 @@ export type convType<prop, partial extends boolean = false> = {
       VueComponentOptions<Partial<prop>>,
   ): any
 }
-
-export const getCompOpts = decorator.getCompOpts
 
 export function getInstCompName(inst) {
   if (inst.componentOptions) {

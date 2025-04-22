@@ -1,11 +1,23 @@
-import { Component, toNative, Vue } from 'vue-facing-decorator'
+import { Component } from 'vue-facing-decorator'
 
 import { Base } from '@/views/base'
+import { Buttons } from '@/components'
 @Component
-class App extends Base {
+export default class App extends Base {
   render() {
-    return <div>1234</div>
+    return (
+      <Buttons
+        items={[
+          {
+            name: 'query',
+            label: '查询',
+            type: 'primary',
+            click: () => {
+              console.log(111111)
+            },
+          },
+        ]}
+      ></Buttons>
+    )
   }
 }
-
-export default toNative(App)
