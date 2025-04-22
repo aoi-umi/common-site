@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 defineComponent({
   name: 'ButtonsComp',
@@ -26,10 +26,15 @@ export type ButtonItem = {
   click?: (opt?: { item: ButtonItem }) => any
 }
 
-defineProps<{
-  defaultType?: String
-  items: ButtonItem[]
-}>()
+defineProps({
+  defaultType: {
+    type: String,
+    required: false,
+  },
+  items: {
+    type: Array as PropType<ButtonItem[]>,
+  },
+})
 
 function handleClick(ele: ButtonItem) {
   if (ele.click) {

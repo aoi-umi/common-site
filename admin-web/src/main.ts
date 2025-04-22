@@ -3,7 +3,7 @@ import { createPinia } from 'pinia'
 
 import { ElementUI } from './plugins/define'
 
-import App from './AppX'
+import App from './AppX.vue'
 
 const pinia = createPinia()
 const app = createApp(App)
