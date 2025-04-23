@@ -1,6 +1,8 @@
 <template>
   <el-dialog v-model="show" :title="title" append-to-body>
-    <slot></slot>
+    <div class="content-box">
+      <slot></slot>
+    </div>
     <el-row :gutter="5" type="flex" justify="end">
       <el-button
         v-for="(btn, idx) in innerBtnList"
