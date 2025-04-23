@@ -1,6 +1,19 @@
 <template>
-  <div class="root">
-    <el-input v-model="v" />
+  <div
+    class="root"
+    v-key-input="{
+      key: 'enter',
+      fn: () => {
+        console.log('enter')
+      },
+    }"
+  >
+    <div>
+      <div>dynamic-comp: {{ dynamicComp }}</div>
+      <div>icon-select: {{ iconSelect }}</div>
+    </div>
+    <el-input v-model="dynamicComp" />
+    <ConfirmDialog ref="dialog"> 测试 </ConfirmDialog>
     <Buttons
       :items="[
         {
@@ -13,22 +26,21 @@
         },
       ]"
     ></Buttons>
-    <div>
-      <DynamicComp
-        type-selectable
-        type="input"
-        v-model="v"
-        :comp-props="{ style: 'width: 200px' }"
-      ></DynamicComp>
-    </div>
-    <ConfirmDialog ref="dialog"> 测试 </ConfirmDialog>
+    <DynamicComp
+      type-selectable
+      type="input"
+      v-model="dynamicComp"
+      :comp-props="{ style: 'width: 200px' }"
+    ></DynamicComp>
+    <IconSelect v-model="iconSelect"></IconSelect>
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Buttons, ConfirmDialog, DynamicComp } from './components'
+import { Buttons, ConfirmDialog, DynamicComp, IconSelect } from './components'
 const dialog = ref<InstanceType<typeof ConfirmDialog>>(null)
-const v = ref('value')
+const dynamicComp = ref('value')
+const iconSelect = ref()
 </script>
 <style lang="less" scoped>
 .root {

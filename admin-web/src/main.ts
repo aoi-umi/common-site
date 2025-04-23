@@ -1,11 +1,12 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
-import { ElementUI } from './plugins/define'
+import plugins from './plugins'
+import directive from './directive'
 
 import App from './AppX.vue'
 
 const pinia = createPinia()
 const app = createApp(App)
-app.use(pinia).use(ElementUI.default, { size: 'small' })
+app.use(pinia).use(plugins).use(directive)
 app.mount('#app')

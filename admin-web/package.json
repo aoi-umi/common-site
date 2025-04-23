@@ -10,6 +10,7 @@
     "format": "eslint --fix --quiet ./src/**/*.{ts,tsx}"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
     "axios": "^0.27.2",
     "core-js": "^3.6.5",
     "element-plus": "^2.9.8",
