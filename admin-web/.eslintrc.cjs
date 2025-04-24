@@ -21,6 +21,9 @@ module.exports = module.exports = {
     parser: '@typescript-eslint/parser',
     ecmaVersion: 'latest',
     sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true, // 启用 JSX 支持
+    },
   },
   plugins: ['vue'],
   ignorePatterns: ['.eslintrc.cjs'],
