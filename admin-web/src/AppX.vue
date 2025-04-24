@@ -95,6 +95,19 @@
       "
       pagePosition="both"
     ></TableEx>
+    <Load
+      :load-fn="
+        async () => {
+          await wait(2000)
+          // throw new Error('test')
+          return 1234
+        }
+      "
+    >
+      <template #default="slot">
+        <el-card>{{ slot.data }}</el-card>
+      </template>
+    </Load>
   </div>
 </template>
 <script setup lang="ts">
@@ -104,9 +117,11 @@ import {
   ConfirmDialog,
   DynamicComp,
   IconSelect,
+  Load,
   TableEx,
   Tags,
 } from './components'
+import { wait } from './utils'
 const dialog = ref<InstanceType<typeof ConfirmDialog>>(null)
 const dynamicComp = ref('value')
 const iconSelect = ref()

@@ -72,6 +72,7 @@ export type TableExColumnProp = {
 defineComponent({
   name: 'TableEx',
 })
+
 const props = defineProps({
   tableProps: Object,
   columns: Array as () => TableExColumnProp[],
@@ -117,6 +118,18 @@ const loadData = async () => {
   }
 }
 
+const pagination = () => (
+  <el-pagination
+    class="page"
+    background
+    layout="total, sizes, prev, pager, next, jumper"
+    hideOnSinglePage
+    total={model.value.total}
+    v-model:currentPage={model.value.page.index}
+    v-model:pageSize={model.value.page.size}
+  />
+)
+
 watch(
   () => props.columns,
   (newVal) => {
@@ -133,17 +146,6 @@ watch(
 watch(
   () => model.value.page.size,
   () => queryTrigger(),
-)
-const pagination = () => (
-  <el-pagination
-    class="page"
-    background
-    layout="total, sizes, prev, pager, next, jumper"
-    hideOnSinglePage
-    total={model.value.total}
-    v-model:currentPage={model.value.page.index}
-    v-model:pageSize={model.value.page.size}
-  />
 )
 
 defineExpose({
