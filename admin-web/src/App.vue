@@ -6,7 +6,7 @@
           :icon="menuCollapse ? 'el-icon-expand' : 'el-icon-fold'"
           @click="menuCollapse = !menuCollapse"
         ></el-button>
-        <el-popover trigger="click" :show-arrow="false">
+        <el-popover trigger="click" :show-arrow="false" width="220">
           <template #reference>
             <el-input
               v-model="searchModel"
@@ -170,6 +170,7 @@ const loadData = async () => {
     })
   }
   setTitleByRoute()
+  search()
 }
 
 const findCurrMenu = (opt?: { nameOnly?: boolean }) => {
