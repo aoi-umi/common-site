@@ -1,14 +1,22 @@
-import ElementUI from 'element-plus'
-import 'element-plus/theme-chalk/index.css'
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { App } from 'vue'
+import ui from './ui'
+export * from './ui'
+import eventBus from './event-bus'
+import { MainApi, MainMethod } from '@/api'
+import { apiConfig } from '@/config'
+import * as utils from '@/utils'
 
-export const elementIcons = Object.keys(ElementPlusIconsVue)
+const mainApi = MainApi.create<MainMethod, MainApi>(new MainApi(apiConfig))
 export default {
   install(app: App, options) {
-    app.use(ElementUI, { size: 'small' })
-    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-      app.component(key, component)
-    }
+    ui.install(app, options)
   },
+}
+
+export function usePlugins() {
+  return {
+    $api: mainApi,
+    $utils: utils,
+    $eventBus: eventBus,
+  }
 }

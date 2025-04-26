@@ -5,6 +5,7 @@ import { error } from '../utils'
 import {
   ApiModel,
   ApiConfigModel,
+  ApiModelInstanceType,
   ApiMethodConfigType,
   ApiMethod,
   ApiMethodInferType,
@@ -60,6 +61,8 @@ export type ListResult<T = any> = {
   total: number
   rows: T[]
 }
+
+export type MainApiInstanceType = ApiModelInstanceType<MainMethod, MainApi>
 export class MainApi extends ApiModel<MainMethod> {
   constructor(apiConfig: MainApiConfigType) {
     super(apiConfig, {

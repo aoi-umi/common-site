@@ -4,7 +4,7 @@ import { Load, Form, FormItem, Tags, Button, Dialog, Input } from '@/components'
 import { cls } from '@/components/styles'
 import { OperateModel } from '@/utils'
 
-import { UserAvatar } from '../user'
+import { UserAvatar } from '../comps/user'
 import { AdminUserDataType } from '../admin-user-mgt'
 import { RoleTags } from '../comps/role-tags'
 

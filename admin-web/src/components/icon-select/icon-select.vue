@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent, defineModel } from 'vue'
+import { defineComponent } from 'vue'
 import { Icons } from './data'
 
 defineComponent({

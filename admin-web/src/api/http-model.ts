@@ -17,6 +17,14 @@ export type RequestByConfigOption<T> = {
 } & AxiosRequestConfig
 
 // 推断类型
+export type ApiModelInstanceType<T, U extends ApiModel<T>> = U & {
+  [P in keyof T]: (
+    data?: T[P] extends ApiMethodInferType<infer Req, any> ? Req : any,
+    options?: {
+      params?: any
+    },
+  ) => Promise<T[P] extends ApiMethodInferType<any, infer Res> ? Res : any>
+}
 export type ApiMethodInferType<Req, Res> = {}
 export class ApiModel<T> {
   protected beforeRequest: BeforeRequest
@@ -45,14 +53,7 @@ export class ApiModel<T> {
         return api.requestByConfig(method, { data, userOptions: options })
       }
     }
-    return api as U & {
-      [P in keyof T]: (
-        data?: T[P] extends ApiMethodInferType<infer Req, any> ? Req : any,
-        options?: {
-          params?: any
-        },
-      ) => Promise<T[P] extends ApiMethodInferType<any, infer Res> ? Res : any>
-    }
+    return api as ApiModelInstanceType<T, U>
   }
 
   getRequestConfig(config: ApiMethodConfigType) {

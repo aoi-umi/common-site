@@ -1,18 +1,17 @@
 import { createWebHistory, createRouter, RouteRecordRaw } from 'vue-router'
-
 export const routes: Array<RouteRecordRaw> = [
   // {
   //   path: '/',
   //   // redirect: '/menuMgt',
   // },
-  {
-    path: '/signIn',
-    component: () => import('../views/sign-in'),
-    meta: {
-      name: 'signIn',
-      text: '登录',
-    },
-  },
+  // {
+  //   path: '/signIn',
+  //   component: () => import('../views/sign-in'),
+  //   meta: {
+  //     name: 'signIn',
+  //     text: '登录',
+  //   },
+  // },
   // {
   //   path: '/sysMgt',
   //   component: () => import('../views/sys-mgt'),
@@ -71,7 +70,7 @@ export const routes: Array<RouteRecordRaw> = [
   //   },
   // },
   {
-    path: '*',
+    path: '/:path(.*)',
     component: () => import('../views/error'),
     meta: {
       name: 'error',

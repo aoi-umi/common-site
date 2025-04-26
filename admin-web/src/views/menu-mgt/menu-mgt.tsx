@@ -32,7 +32,7 @@ import styles from './index.module.less'
 export type MenuType = {
   id?: string
   pageName?: string
-  text?: string | unknown
+  text?: string
   name?: string
   icon?: string
   status?: boolean
