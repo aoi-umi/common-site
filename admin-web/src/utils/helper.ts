@@ -14,7 +14,7 @@ export const saveFile = (data, name?) => {
   FileSaver.saveAs(data, name)
 }
 
-export const validateForm = (form: typeof ElementUI.ElForm) => {
+export const validateForm = (form: ElementUI.FormInstance) => {
   let def = defer()
   form.validate((isValid: boolean, invalidFields) => {
     if (!isValid) {

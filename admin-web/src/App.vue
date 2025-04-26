@@ -6,7 +6,7 @@
           :icon="menuCollapse ? 'el-icon-expand' : 'el-icon-fold'"
           @click="menuCollapse = !menuCollapse"
         ></el-button>
-        <el-popover trigger="focus" :visible-arrow="false">
+        <el-popover trigger="click" :show-arrow="false">
           <template #reference>
             <el-input
               v-model="searchModel"
@@ -15,44 +15,37 @@
               clearable
               placeholder="请输入"
             />
-            <div>
-              <el-menu class="search-menu">
-                <el-menu-item
-                  v-for="(ele, idx) in searchData"
-                  :key="idx"
-                  :index="`${idx}`"
-                >
-                  <el-icon>
-                    <component :is="ele.icon || defaultIcon" />
-                  </el-icon>
-                  <span>{{ ele.text }}</span>
-                </el-menu-item>
-              </el-menu>
-            </div>
           </template>
+          <el-menu class="search-menu">
+            <component
+              v-for="(ele, idx) in searchData"
+              :is="renderMenuItem(ele, { prefix: `${idx}` })"
+              :key="`${idx}`"
+            ></component>
+          </el-menu>
         </el-popover>
       </div>
       <div>
         <el-popover
           v-if="storeUser.user.isLogin"
           trigger="hover"
-          :visible-arrow="false"
+          :show-arrow="false"
         >
           <template #reference>
-            <!-- <UserAvatar :user="storeUser.user" /> -->
-            <div class="user-menu">
-              <el-button type="text">
-                <router-link to="/adminUser/me">主页</router-link>
-              </el-button>
-              <el-button
-                type="danger"
-                @click="signOutClick"
-                :loading="op.loading"
-              >
-                退出
-              </el-button>
-            </div></template
-          >
+            <UserAvatar :user="storeUser.user" />
+          </template>
+          <div class="user-menu">
+            <el-button link>
+              <router-link to="/adminUser/me">主页</router-link>
+            </el-button>
+            <el-button
+              type="danger"
+              @click="signOutClick"
+              :loading="op.loading"
+            >
+              退出
+            </el-button>
+          </div>
         </el-popover>
         <el-button
           v-else
@@ -66,36 +59,11 @@
     </div>
     <div class="main">
       <el-menu class="menu" :collapse="menuCollapse">
-        <template v-for="(ele, idx) in menu">
-          <el-sub-menu
-            v-if="ele.children?.length"
-            :key="`sub-menu-${idx}`"
-            :index="`${idx}`"
-          >
-            <template #title>
-              <el-icon>
-                <component :is="ele.icon || defaultIcon" />
-              </el-icon>
-              <span>{{ ele.text }}</span>
-            </template>
-            <el-menu-item
-              v-for="(child, childIdx) in ele.children"
-              :key="`${idx}-${childIdx}`"
-              :index="`${idx}-${childIdx}`"
-            >
-              <el-icon>
-                <component :is="child.icon || defaultIcon" />
-              </el-icon>
-              <span>{{ child.text }}</span>
-            </el-menu-item>
-          </el-sub-menu>
-          <el-menu-item v-else :key="idx" :index="`${idx}`">
-            <el-icon>
-              <component :is="ele.icon || defaultIcon" />
-            </el-icon>
-            <span>{{ ele.text }}</span>
-          </el-menu-item>
-        </template>
+        <component
+          v-for="(ele, idx) in menu"
+          :is="renderMenuItem(ele, { prefix: `${idx}` })"
+          :key="`${idx}`"
+        ></component>
       </el-menu>
       <div class="main-content">
         <router-view v-if="menuAuth.hasAuth" />
@@ -103,15 +71,16 @@
         <el-backtop :target="`.main-content`" />
       </div>
     </div>
-    <el-dialog v-model:visible="storeSetting.setting.signInShow" width="400px">
-      <!-- <SignInComp /> -->
+    <el-dialog v-model="storeSetting.settings.signInShow" width="400px">
+      <SignInComp />
     </el-dialog>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="tsx" setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { ElMessageBox } from 'element-plus'
 
 import { currEnvCfg } from '@/config'
 import { routes } from '@/router'
@@ -121,8 +90,8 @@ import { OperateModel } from '@/utils'
 import Base from '@/views/base'
 import ErrorView from '@/views/error'
 import { MenuType } from '@/views/menu-mgt'
-// import { SignInComp } from './views/sign-in'
-// import { UserAvatar } from './views/comps/user'
+import { SignInComp } from './views/sign-in'
+import { UserAvatar } from './views/comps/user'
 
 type MainMenuType = MenuType & {
   path?: string
@@ -136,7 +105,9 @@ const menu = ref<MainMenuType[]>([])
 const menuCollapse = ref(true)
 const searchModel = ref('')
 const searchData = ref<MainMenuType[]>([])
-const op = ref(new OperateModel<{ op: string }>({ fn: () => {} }))
+const op = ref(
+  new OperateModel<{ op: 'signOut' | 'logining' }>({ fn: () => {} }),
+)
 const defaultIcon = ref('el-icon-menu')
 
 const menuAuth = computed(() => {
@@ -159,17 +130,26 @@ const isDev = computed(() => {
   return $utils.isLocal()
 })
 
+async function signInSuccess() {
+  storeSetting.setSettings({
+    signInShow: false,
+  })
+  await loadData()
+}
+
 const init = async () => {
   op.value = new OperateModel({
     fn: ({ op }) => {
       if (op === 'signOut') return signOut()
+      if (op === 'logining') return getUserInfo()
     },
   })
   await loadData()
   search()
-  storeUser.logining = true
-  const user = await $api.adminUserInfo()
-  setUser(user)
+  op.value.run({ op: 'logining' })
+  $eventBus.on('signInSuccess', () => {
+    signInSuccess()
+  })
 }
 
 const loadData = async () => {
@@ -244,22 +224,90 @@ const searchMatchedMenu = (query: string, data: MainMenuType[]) => {
 }
 
 const showSignInClick = () => {
-  storeSetting.setting.signInShow = true
+  storeSetting.setSettings({
+    signInShow: true,
+  })
 }
 
 const signOutClick = () => {
   op.value.run({ op: 'signOut' })
 }
 
+const getUserInfo = async () => {
+  storeUser.setLogining(true)
+  try {
+    const user = await $api.adminUserInfo()
+    storeUser.setUser(user)
+  } finally {
+    storeUser.setLogining(false)
+  }
+}
+
 const signOut = async () => {
   await $api.adminUserSignOut()
-  setUser(null)
+  storeUser.setUser(null)
   menu.value = []
   await loadData()
 }
 
-const setUser = (user: any) => {
-  storeUser.user = user
+const renderMenuItem = (ele: MainMenuType, opt?: { prefix?: string }) => {
+  opt = {
+    ...opt,
+  }
+  let prefix = opt.prefix || ''
+  let icon = ele.icon || defaultIcon.value
+  const Icon = $utils.getCompByName(icon)
+  if (ele.children?.length) {
+    return (
+      <el-sub-menu index={prefix}>
+        {{
+          title: () => [
+            <el-icon>
+              <Icon />
+            </el-icon>,
+            <span>{ele.text}</span>,
+          ],
+          default: () =>
+            ele.children.map((child, idx) =>
+              renderMenuItem(child, { prefix: `${prefix}-${idx}` }),
+            ),
+        }}
+      </el-sub-menu>
+    )
+  }
+  const item = (
+    <el-menu-item index={prefix}>
+      {{
+        title: () => <span slot="title">{ele.text}</span>,
+        default: () => (
+          <el-icon>
+            <Icon />
+          </el-icon>
+        ),
+      }}
+    </el-menu-item>
+  )
+  if (!ele.path) {
+    return (
+      <div
+        on-click={() => {
+          ElMessageBox.confirm('未设置')
+        }}
+      >
+        {item}
+      </div>
+    )
+  }
+  return (
+    <router-link
+      to={{
+        path: ele.path,
+        query: { _name: ele.name },
+      }}
+    >
+      {item}
+    </router-link>
+  )
 }
 
 onMounted(init)

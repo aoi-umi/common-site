@@ -1,7 +1,5 @@
 import { RouteLocationRaw, useRouter } from 'vue-router'
-import { UserInfo } from '@/models/user'
-import { LocalStore, useSettingStore, useUserStore } from '@/store'
-import { env } from '@/config'
+import { useSettingStore, useUserStore } from '@/store'
 import { OperateModel, OperateOption } from '@/utils'
 
 export default function Base() {
@@ -9,20 +7,11 @@ export default function Base() {
   const storeUser = useUserStore()
   const storeSetting = useSettingStore()
 
-  const setUser = (userInfo: UserInfo) => {
-    storeUser.setLogining(false)
-    if (userInfo) {
-      const token = userInfo.authToken
-      LocalStore.setItem(env.authKey, token)
-    }
-    storeUser.setUser(userInfo)
-  }
-
-  const getOpModel = (opt: OperateOption) => {
-    return new OperateModel({
+  const getOpModel = <T>(opt: OperateOption) => {
+    return new OperateModel<T>({
       defaultErrHandler: (e) => {
         if (e['statusCode'] === 401) {
-          storeSetting.setSetting({
+          storeSetting.setSettings({
             signInShow: true,
           })
         }
@@ -51,7 +40,6 @@ export default function Base() {
   return {
     storeUser,
     storeSetting,
-    setUser,
     getOpModel,
     gotoPage,
   }

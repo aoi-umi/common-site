@@ -10,6 +10,7 @@ import {
   ApiMethod,
   ApiMethodInferType,
 } from './http-model'
+import { currEnvCfg } from '@/config'
 
 export type MainMethod = {
   adminMainData
@@ -85,10 +86,10 @@ export class MainApi extends ApiModel<MainMethod> {
 
   defaultHeaders() {
     const headers = {}
-    let auth = 'auth'
-    const token = LocalStore.getItem(auth)
+    let authKey = currEnvCfg.authKey
+    const token = LocalStore.getItem(authKey)
     if (token) {
-      headers[auth] = token
+      headers[authKey] = token
     }
     return headers
   }

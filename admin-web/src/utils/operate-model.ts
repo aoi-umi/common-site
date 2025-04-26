@@ -1,5 +1,4 @@
-import { getCurrentInstance } from 'vue'
-const vm = getCurrentInstance()?.proxy
+import { ElMessage } from 'element-plus'
 export type OperateOption<T = any> = {
   prefix?: string
   fn: (args?: T) => any
@@ -63,14 +62,14 @@ export class OperateModel<T extends Object = {}> {
           result.msg = '参数有误'
           if (opt.throwError) throw new Error(result.msg)
           if (!this.opt.noValidMessage) {
-            vm.$message.error(result.msg)
+            ElMessage.error(result.msg)
           }
           return result
         }
       }
       result.data = await opt.fn(args)
       if (!opt.noDefaultHandler && !opt.noSuccessHandler) {
-        vm.$message.success({
+        ElMessage.success({
           message: operate + '成功',
           onClose: opt.onSuccessClose,
         })
@@ -83,7 +82,7 @@ export class OperateModel<T extends Object = {}> {
       if (!opt.noDefaultHandler && !opt.noErrorHandler) {
         let rs = opt.defaultErrHandler ? opt.defaultErrHandler(e) : true
         if (rs) {
-          vm.$message.error(operate + '出错:' + e.message)
+          ElMessage.error(operate + '出错:' + e.message)
         }
       }
       if (!e.code) {

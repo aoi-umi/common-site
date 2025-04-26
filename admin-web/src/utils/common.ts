@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import * as qs from 'qs'
+import { resolveComponent } from 'vue'
 import { RouteLocationRaw, RouteLocation } from 'vue-router'
 
 export async function request(options: AxiosRequestConfig) {
@@ -124,4 +125,13 @@ export const openWindow = (location: RouteLocationRaw, target?: string) => {
 
 export const setTitle = (title: string) => {
   document.title = title
+}
+
+const comps = {}
+export const getCompByName = (name: string) => {
+  let comp = comps[name]
+  if (!comp) {
+    comp = comps[name] = resolveComponent(name)
+  }
+  return comp
 }

@@ -4,6 +4,7 @@ import { createPinia } from 'pinia'
 import plugins from '@/plugins'
 import directive from '@/directive'
 import router from '@/router'
+import '@/assets/styles'
 
 import App from './App.vue'
 
