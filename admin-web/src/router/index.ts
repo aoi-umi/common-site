@@ -20,14 +20,14 @@ export const routes: Array<RouteRecordRaw> = [
   //     text: '系统管理',
   //   },
   // },
-  // {
-  //   path: '/menuMgt',
-  //   component: () => import('../views/menu-mgt'),
-  //   meta: {
-  //     name: 'menuMgt',
-  //     text: '菜单管理',
-  //   },
-  // },
+  {
+    path: '/menuMgt',
+    component: () => import('../views/menu-mgt'),
+    meta: {
+      name: 'menuMgt',
+      text: '菜单管理',
+    },
+  },
   // {
   //   path: '/authorityMgt',
   //   component: () => import('../views/authority-mgt'),

@@ -3,7 +3,8 @@
     <el-button
       v-for="(ele, index) in items"
       :key="index"
-      :type="defaultType || (ele.type as any)"
+      :type="getType(ele)"
+      :link="isLink(ele)"
       v-bind="ele"
       @click="handleClick(ele)"
     >
@@ -26,7 +27,7 @@ export type ButtonItem = {
   click?: (opt?: { item: ButtonItem }) => any
 }
 
-defineProps({
+const props = defineProps({
   defaultType: {
     type: String,
     required: false,
@@ -35,6 +36,18 @@ defineProps({
     type: Array as PropType<ButtonItem[]>,
   },
 })
+
+function getType(ele: ButtonItem, origin?: boolean): any {
+  let type = props.defaultType || ele.type
+  if (!origin) {
+    if (type === 'text') type = 'primary'
+  }
+  return type
+}
+
+function isLink(ele: ButtonItem) {
+  return getType(ele, true) === 'text'
+}
 
 function handleClick(ele: ButtonItem) {
   if (ele.click) {

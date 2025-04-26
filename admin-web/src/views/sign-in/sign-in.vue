@@ -26,15 +26,15 @@ import { ref } from 'vue'
 import { FormInstance } from 'element-plus'
 
 import { OperateModel } from '@/utils'
+import { usePlugins } from '@/plugins'
 import { LoginUser } from '@/models/user'
 import Base from '@/views/base'
-import { usePlugins } from '@/plugins'
 
-const { storeUser } = Base()
+const { storeUser, getOpModel } = Base()
 const { $api, $eventBus, $utils } = usePlugins()
 
 const op = ref(
-  new OperateModel<{ op: string }>({
+  getOpModel<{ op: string }>({
     fn: ({ op }) => {
       return signIn()
     },

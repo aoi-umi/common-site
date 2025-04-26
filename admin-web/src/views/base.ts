@@ -9,6 +9,7 @@ export default function Base() {
 
   const getOpModel = <T>(opt: OperateOption) => {
     return new OperateModel<T>({
+      noSuccessHandler: true,
       defaultErrHandler: (e) => {
         if (e['statusCode'] === 401) {
           storeSetting.setSettings({

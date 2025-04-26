@@ -20,7 +20,7 @@
             <component
               v-for="(ele, idx) in searchData"
               :is="renderMenuItem(ele, { prefix: `${idx}` })"
-              :key="`${idx}`"
+              :key="`${ele.id}`"
             ></component>
           </el-menu>
         </el-popover>
@@ -62,7 +62,7 @@
         <component
           v-for="(ele, idx) in menu"
           :is="renderMenuItem(ele, { prefix: `${idx}` })"
-          :key="`${idx}`"
+          :key="`${ele.id}`"
         ></component>
       </el-menu>
       <div class="main-content">
@@ -85,7 +85,6 @@ import { ElMessageBox } from 'element-plus'
 import { currEnvCfg } from '@/config'
 import { routes } from '@/router'
 import { usePlugins } from '@/plugins'
-import { OperateModel } from '@/utils'
 
 import Base from '@/views/base'
 import ErrorView from '@/views/error'
@@ -93,20 +92,25 @@ import { MenuType } from '@/views/menu-mgt'
 import { SignInComp } from './views/sign-in'
 import { UserAvatar } from './views/comps/user'
 
+const route = useRoute()
+const { $api, $utils, $eventBus } = usePlugins()
+const { storeUser, storeSetting, getOpModel } = Base()
+
 type MainMenuType = MenuType & {
   path?: string
 }
-
-const route = useRoute()
-const { $api, $utils, $eventBus } = usePlugins()
-const { storeUser, storeSetting } = Base()
 
 const menu = ref<MainMenuType[]>([])
 const menuCollapse = ref(true)
 const searchModel = ref('')
 const searchData = ref<MainMenuType[]>([])
 const op = ref(
-  new OperateModel<{ op: 'signOut' | 'logining' }>({ fn: () => {} }),
+  getOpModel<{ op: 'signOut' | 'logining' }>({
+    fn: ({ op }) => {
+      if (op === 'signOut') return signOut()
+      if (op === 'logining') return getUserInfo()
+    },
+  }),
 )
 const defaultIcon = ref('el-icon-menu')
 
@@ -138,12 +142,6 @@ async function signInSuccess() {
 }
 
 const init = async () => {
-  op.value = new OperateModel({
-    fn: ({ op }) => {
-      if (op === 'signOut') return signOut()
-      if (op === 'logining') return getUserInfo()
-    },
-  })
   await loadData()
   search()
   op.value.run({ op: 'logining' })
@@ -291,7 +289,7 @@ const renderMenuItem = (ele: MainMenuType, opt?: { prefix?: string }) => {
   if (!ele.path) {
     return (
       <div
-        on-click={() => {
+        onClick={() => {
           ElMessageBox.confirm('未设置')
         }}
       >

@@ -1,7 +1,7 @@
 <template>
-  <el-select v-model="model" clearable filterable class="select">
+  <el-select v-model="model" clearable filterable>
     <template #prefix>
-      <component :is="model" class="prefix" />
+      <component :is="model" class="prefix" v-if="model" />
     </template>
     <el-option
       v-for="(ele, index) in Icons"
@@ -29,6 +29,7 @@ const model = defineModel()
 <style scoped lang="less">
 .prefix {
   width: 1rem;
+  color: var(--el-color-primary);
 }
 .item {
   display: flex;

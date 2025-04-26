@@ -1,4 +1,5 @@
-import './style'
+import './style.less'
+import './element-ui.less'
 
 const clsPrefix = 'comp-'
 export const cls = {
