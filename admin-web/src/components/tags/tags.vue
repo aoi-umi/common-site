@@ -33,9 +33,11 @@ defineProps({
 
 <style scoped lang="less">
 .box {
-  display: inline-block;
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: inherit;
   > * {
-    margin-right: 10px;
+    margin: 0 10px 5px 0;
   }
 }
 </style>

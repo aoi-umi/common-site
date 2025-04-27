@@ -30,7 +30,7 @@
                   <span>{{ data.text }} ({{ data.name }})</span>
                 </span>
                 <span :class="cls.wrap"></span>
-                <div style="width: 120px">
+                <div style="width: 180px">
                   <Tags :items="data.authorityList" />
                 </div>
                 <div class="op-box">
@@ -106,7 +106,7 @@
             </el-form-item>
             <div class="break-line"></div>
             <el-form-item label="权限">
-              <!-- <AuthoritySelect ref="authSelect" :data="authData" /> -->
+              <AuthoritySelect ref="authSelect" v-model="authData" />
             </el-form-item>
           </el-form>
         </div>
@@ -125,11 +125,11 @@ import { usePlugins } from '@/plugins'
 import { Buttons, IconSelect, Load, Tags } from '@/components'
 import { cls } from '@/components/styles'
 import Base from '@/views/base'
-// import {
-//   AuthoritySelect,
-//   AuthoritySelectDataType,
-//   AuthoritySelectModel,
-// } from '../comps/authority-select'
+import {
+  AuthoritySelect,
+  AuthoritySelectInstance,
+  AuthoritySelectModel,
+} from '../comps/authority-select'
 import { AuthorityDataType } from '../authority-mgt'
 
 export type MenuType = {
@@ -149,7 +149,7 @@ const { $api, $utils } = usePlugins()
 
 const tree = ref<ElementUI.TreeInstance>()
 const form = ref<ElementUI.FormInstance>()
-// const authSelect = ref<typeof AuthoritySelect>()
+const authSelect = ref<AuthoritySelectInstance>()
 
 const op = ref(
   getOpModel<{ op: string; data: any }>({
@@ -213,14 +213,14 @@ const editClick = (data) => {
 }
 
 function editData() {
-  // authData.value.list = [
-  //   ...editingData.value.authorityList.map((ele) =>
-  //     AuthoritySelectModel.toTransferData(ele),
-  //   ),
-  // ]
+  authData.value.list = [
+    ...editingData.value.authorityList.map((ele) =>
+      AuthoritySelectModel.toTransferData(ele),
+    ),
+  ]
   authData.value.value = authData.value.list.map((ele) => ele.key)
   form.value?.resetFields()
-  // authSelect?.value.reset()
+  authSelect.value?.reset()
   editDiaVisible.value = true
 }
 
@@ -321,6 +321,8 @@ async function move(data) {
   display: flex;
   flex: 1;
   align-items: center;
+  height: auto;
+  margin: 5px 0;
 }
 .disabled {
   color: #c1c1c1;
