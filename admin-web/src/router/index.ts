@@ -4,22 +4,22 @@ export const routes: Array<RouteRecordRaw> = [
   //   path: '/',
   //   // redirect: '/menuMgt',
   // },
-  // {
-  //   path: '/signIn',
-  //   component: () => import('../views/sign-in'),
-  //   meta: {
-  //     name: 'signIn',
-  //     text: '登录',
-  //   },
-  // },
-  // {
-  //   path: '/sysMgt',
-  //   component: () => import('../views/sys-mgt'),
-  //   meta: {
-  //     name: 'sysMgt',
-  //     text: '系统管理',
-  //   },
-  // },
+  {
+    path: '/signIn',
+    component: () => import('../views/sign-in'),
+    meta: {
+      name: 'signIn',
+      text: '登录',
+    },
+  },
+  {
+    path: '/sysMgt',
+    component: () => import('../views/sys-mgt'),
+    meta: {
+      name: 'sysMgt',
+      text: '系统管理',
+    },
+  },
   {
     path: '/menuMgt',
     component: () => import('../views/menu-mgt'),
@@ -52,15 +52,14 @@ export const routes: Array<RouteRecordRaw> = [
   //     text: 'api管理',
   //   },
   // },
-  // {
-  //   path: '/adminUser/:id',
-  //   component: () =>
-  //     import('../views/admin-user').then((t) => t.AdminUserDetail),
-  //   meta: {
-  //     name: 'adminUserDetail',
-  //     text: '用户',
-  //   },
-  // },
+  {
+    path: '/adminUser/:id',
+    component: () => import('../views/admin-user'),
+    meta: {
+      name: 'adminUserDetail',
+      text: '用户',
+    },
+  },
   // {
   //   path: '/adminUserMgt',
   //   component: () => import('../views/admin-user-mgt'),

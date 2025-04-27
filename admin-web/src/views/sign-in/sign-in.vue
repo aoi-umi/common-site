@@ -25,7 +25,6 @@
 import { ref } from 'vue'
 import { FormInstance } from 'element-plus'
 
-import { OperateModel } from '@/utils'
 import { usePlugins } from '@/plugins'
 import { LoginUser } from '@/models/user'
 import Base from '@/views/base'
