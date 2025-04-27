@@ -112,7 +112,7 @@ export const isLocal = () => {
   return window.location.hostname === 'localhost'
 }
 
-export const getUrl = (obj: RouteLocation) => {
+export const getUrl = (obj: Partial<RouteLocation>) => {
   let queryStr = qs.stringify(obj.query)
   let url = obj.path + (queryStr ? `?${queryStr}` : queryStr)
   return url

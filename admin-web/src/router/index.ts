@@ -28,14 +28,14 @@ export const routes: Array<RouteRecordRaw> = [
       text: '菜单管理',
     },
   },
-  // {
-  //   path: '/authorityMgt',
-  //   component: () => import('../views/authority-mgt'),
-  //   meta: {
-  //     name: 'authorityMgt',
-  //     text: '权限管理',
-  //   },
-  // },
+  {
+    path: '/authorityMgt',
+    component: () => import('../views/authority-mgt'),
+    meta: {
+      name: 'authorityMgt',
+      text: '权限管理',
+    },
+  },
   // {
   //   path: '/roleMgt',
   //   component: () => import('../views/role-mgt'),

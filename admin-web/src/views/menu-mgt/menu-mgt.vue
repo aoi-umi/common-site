@@ -131,6 +131,7 @@ import {
   AuthoritySelectModel,
 } from '../comps/authority-select'
 import { AuthorityDataType } from '../authority-mgt'
+import { Confirm } from '@/components/decorator'
 
 export type MenuType = {
   id?: string
@@ -197,6 +198,15 @@ function getNewMenuData() {
     status: true,
   }
   return newData
+}
+class FunctionWrapper {
+  @Confirm((data) => `确认删除[${data.text}(${data.name})]?`)
+  static async delClick(data: MenuType, node) {
+    op.value.run({
+      op: 'del',
+      data: { data, node },
+    })
+  }
 }
 
 const addClick = (data?: MenuType) => {
@@ -276,17 +286,7 @@ async function save({ data }) {
   editDiaVisible.value = false
 }
 
-const delClick = async (data, node) => {
-  try {
-    await ElementUI.ElMessageBox.confirm(`确认删除?`)
-    op.value.run({
-      op: 'del',
-      data: { data, node },
-    })
-  } catch (e) {
-    //
-  }
-}
+const delClick = FunctionWrapper.delClick
 
 async function del({ data, node }) {
   let { children, index } = findInChild(data, node)
@@ -321,9 +321,9 @@ async function move(data) {
   display: flex;
   flex: 1;
   align-items: center;
-  height: auto;
   margin: 5px 0;
 }
+
 .disabled {
   color: #c1c1c1;
 }

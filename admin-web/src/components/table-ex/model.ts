@@ -1,3 +1,5 @@
+import TableEx from './table-ex.vue'
+export type TableExInstance = InstanceType<typeof TableEx>
 export type TableExQuery = {
   prop: string
   label?: string

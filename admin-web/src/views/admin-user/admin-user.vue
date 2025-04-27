@@ -73,15 +73,16 @@ import { useRoute } from 'vue-router'
 
 import { cls } from '@/components/styles'
 import { Load, Tags } from '@/components'
-import { OperateModel } from '@/utils'
 import { usePlugins } from '@/plugins'
 
 import { UserAvatar } from '../comps/user'
 import { RoleTags } from '../comps/role-tags'
 import { AdminUserDataType } from '../admin-user-mgt'
+import Base from '../base'
 
 const { $api } = usePlugins()
 const $route = useRoute()
+const { getOpModel } = Base()
 
 const data = ref<AdminUserDataType>(null)
 const editingData = ref<
@@ -94,7 +95,7 @@ const editingData = ref<
 const editDiaVisible = ref(false)
 
 const op = ref(
-  new OperateModel<{ op: string }>({
+  getOpModel<{ op: string }>({
     fn: ({ op }) => {
       if (op === 'save') return save()
     },

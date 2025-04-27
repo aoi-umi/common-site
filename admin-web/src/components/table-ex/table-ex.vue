@@ -37,10 +37,10 @@
         <component :is="pagination()"></component>
       </div>
 
-      <el-table v-bind="tableProps" :data="model.data">
+      <el-table v-bind="tableProps">
         <el-table-column v-for="(ele, index) in cols" :key="index" v-bind="ele">
           <template v-if="ele.render" #default="{ row }">
-            {{ ele.render(row) }}
+            <component :is="ele.render({ row })"></component>
           </template>
         </el-table-column>
       </el-table>
@@ -94,7 +94,7 @@ const op = ref(
   new OperateModel({
     noDefaultHandler: true,
     fn: async () => {
-      return loadData()
+      return loadDataFn()
     },
   }),
 )
@@ -107,14 +107,14 @@ const queryTrigger = (opt?: { refresh?: boolean }) => {
 
 const loadData = async () => {
   errMsg.value = ''
+  let rs = await op.value.run()
+  if (!rs.success) errMsg.value = rs.msg
+  return rs
+}
+
+const loadDataFn = async () => {
   if (props.loadFn) {
-    const rs = await props.loadFn({ model })
-    if (!rs.success) errMsg.value = rs.msg
-    else {
-      model.value.data = rs.data
-      model.value.total = rs.total
-    }
-    return rs
+    return props.loadFn({ model })
   }
 }
 

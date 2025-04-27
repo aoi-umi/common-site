@@ -1,3 +1,2 @@
-import { AuthorityMgt } from './authority-mgt'
-export * from './authority-mgt'
-export default AuthorityMgt
+export * from './authority-mgt.vue'
+export { default } from './authority-mgt.vue'

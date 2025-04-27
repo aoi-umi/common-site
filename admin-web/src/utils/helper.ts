@@ -48,7 +48,7 @@ export const tableExModel2Query = (opt: {
   let newQuery = {}
   for (let key in model.query) {
     let v = model.query[key]
-    if (v.value) newQuery[key] = v
+    if (!['', null, undefined].includes(v.value)) newQuery[key] = v
   }
   let query = {
     data: JSON.stringify({
