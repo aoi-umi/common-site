@@ -65,6 +65,7 @@ export class SysRoleService {
         `on roleAuth.roleId in (${roleIds.map(
           (ele) => `'${ele}'`,
         )}) and roleAuth.authorityId = auth.id`,
+        `order by auth.name`,
       ].join('\r\n'),
     );
     roles.forEach((role) => {

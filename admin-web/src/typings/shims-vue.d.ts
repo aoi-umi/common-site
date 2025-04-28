@@ -9,3 +9,13 @@ interface VueComponentOptions<Props = any> {
   on?: any
   scopedSlots?: any
 }
+
+interface ImportMetaEnv {
+  readonly VITE_APP_TITLE: string
+  readonly VITE_APP_API: string
+  readonly VITE_BASE_URL: string
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}

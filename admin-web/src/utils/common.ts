@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import * as qs from 'qs'
-import { RawLocation, Location } from 'vue-router'
+import { resolveComponent } from 'vue'
+import { RouteLocationRaw, RouteLocation } from 'vue-router'
 
 export async function request(options: AxiosRequestConfig) {
   if (!options.url) {
@@ -111,17 +112,26 @@ export const isLocal = () => {
   return window.location.hostname === 'localhost'
 }
 
-export const getUrl = (obj: Location) => {
+export const getUrl = (obj: Partial<RouteLocation>) => {
   let queryStr = qs.stringify(obj.query)
   let url = obj.path + (queryStr ? `?${queryStr}` : queryStr)
   return url
 }
 
-export const openWindow = (location: RawLocation, target?: string) => {
-  let url = typeof location === 'string' ? location : getUrl(location)
+export const openWindow = (location: RouteLocationRaw, target?: string) => {
+  let url = typeof location === 'string' ? location : getUrl(location as any)
   window.open(url, target)
 }
 
 export const setTitle = (title: string) => {
   document.title = title
+}
+
+const comps = {}
+export const getCompByName = (name: string) => {
+  let comp = comps[name]
+  if (!comp) {
+    comp = comps[name] = resolveComponent(name)
+  }
+  return comp
 }

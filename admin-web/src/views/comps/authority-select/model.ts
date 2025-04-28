@@ -1,6 +1,7 @@
 import { AuthorityDataType } from '@/views/authority-mgt'
-import { AuthorityTransferData } from './authority-select'
+import AuthoritySelect, { AuthorityTransferData } from './authority-select.vue'
 
+export type AuthoritySelectInstance = InstanceType<typeof AuthoritySelect>
 export class AuthoritySelectModel {
   static toTransferData(data: AuthorityDataType): AuthorityTransferData {
     return {

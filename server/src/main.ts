@@ -1,3 +1,4 @@
+import 'source-map-support/register';
 import { ValidationPipe } from '@nestjs/common';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import {

@@ -49,7 +49,12 @@ export class SysApiController {
         (!method || ele.method.toLowerCase().includes(method.toLowerCase()))
       );
     });
-    return { rows: routes };
+    let all = routes;
+    if (dto.pageIndex && dto.pageSize) {
+      let start = (dto.pageIndex - 1) * dto.pageSize;
+      routes = routes.slice(start, start + dto.pageSize);
+    }
+    return { rows: routes, total: all.length };
   }
 
   @Get(':id')

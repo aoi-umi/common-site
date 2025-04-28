@@ -1,13 +1,9 @@
-import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
-
-Vue.use(VueRouter)
-
-export const routes: Array<RouteConfig> = [
-  {
-    path: '/',
-    // redirect: '/menuMgt',
-  },
+import { createWebHistory, createRouter, RouteRecordRaw } from 'vue-router'
+export const routes: Array<RouteRecordRaw> = [
+  // {
+  //   path: '/',
+  //   // redirect: '/menuMgt',
+  // },
   {
     path: '/signIn',
     component: () => import('../views/sign-in'),
@@ -58,8 +54,7 @@ export const routes: Array<RouteConfig> = [
   },
   {
     path: '/adminUser/:id',
-    component: () =>
-      import('../views/admin-user').then((t) => t.AdminUserDetail),
+    component: () => import('../views/admin-user'),
     meta: {
       name: 'adminUserDetail',
       text: '用户',
@@ -74,7 +69,7 @@ export const routes: Array<RouteConfig> = [
     },
   },
   {
-    path: '*',
+    path: '/:path(.*)',
     component: () => import('../views/error'),
     meta: {
       name: 'error',
@@ -83,9 +78,8 @@ export const routes: Array<RouteConfig> = [
   },
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(import.meta.env.VITE_BASE_URL),
   routes,
 })
 

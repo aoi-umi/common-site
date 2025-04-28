@@ -1,6 +1,7 @@
 import { RoleDataType } from '@/views/role-mgt'
-import { RoleTransferData } from './role-select'
+import RoleSelect, { RoleTransferData } from './role-select.vue'
 
+export type RoleSelectInstance = InstanceType<typeof RoleSelect>
 export class RoleSelectModel {
   static toTransferData(data: RoleDataType): RoleTransferData {
     return {

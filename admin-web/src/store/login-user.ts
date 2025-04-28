@@ -1,30 +1,31 @@
-import {
-  Module,
-  VuexModule,
-  Mutation,
-  Action,
-  MutationAction,
-  getModule,
-} from 'vuex-module-decorators'
-import { LoginUserType, LoginUser } from '@/models/user'
-import { env } from '@/config'
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
+
+import { LoginUser, UserInfo } from '@/models/user'
+import { currEnvCfg } from '@/config'
 import { LocalStore } from './local-store'
 
-@Module({ name: 'user' })
-export class LoginUserStore extends VuexModule {
-  user: LoginUserType = LoginUser.create(null)
+export const useUserStore = defineStore('user', () => {
+  const user = ref(LoginUser.create(null))
+  const logining = ref(false)
 
-  @Mutation
-  setUser(user) {
-    this.user = LoginUser.create(user)
-    if (!user) {
-      LocalStore.removeItem(env.authKey)
+  function setUser(data: UserInfo) {
+    user.value = LoginUser.create(data)
+    if (!data) {
+      LocalStore.removeItem(currEnvCfg.authKey)
+    } else {
+      LocalStore.setItem(currEnvCfg.authKey, data.authToken)
     }
   }
 
-  logining = false
-  @Mutation
-  setLogining(v) {
-    this.logining = v
+  function setLogining(v: boolean) {
+    logining.value = v
   }
-}
+
+  return {
+    user,
+    logining,
+    setUser,
+    setLogining,
+  }
+})

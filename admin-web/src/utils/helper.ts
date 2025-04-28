@@ -1,6 +1,6 @@
 import SparkMD5 from 'spark-md5'
 import * as FileSaver from 'file-saver'
-import ElementUI from 'element-ui'
+import * as ElementUI from 'element-plus'
 import { defer } from './common'
 import { TableExModel } from '@/components/table-ex/model'
 import { QueryOpEnum } from '@/models/enum'
@@ -14,7 +14,7 @@ export const saveFile = (data, name?) => {
   FileSaver.saveAs(data, name)
 }
 
-export const validateForm = (form: ElementUI.Form) => {
+export const validateForm = (form: ElementUI.FormInstance) => {
   let def = defer()
   form.validate((isValid: boolean, invalidFields) => {
     if (!isValid) {
@@ -48,7 +48,9 @@ export const tableExModel2Query = (opt: {
   let newQuery = {}
   for (let key in model.query) {
     let v = model.query[key]
-    if (v.value) newQuery[key] = v
+    let empty = ['', null, undefined]
+    if (!empty.includes(v.value) || !empty.includes(v.matchType))
+      newQuery[key] = v
   }
   let query = {
     data: JSON.stringify({

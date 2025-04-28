@@ -1,3 +1,5 @@
+import TableEx from './table-ex.vue'
+export type TableExInstance = InstanceType<typeof TableEx>
 export type TableExQuery = {
   prop: string
   label?: string
@@ -11,7 +13,7 @@ export class TableExModel<T = any> {
   constructor(opt: { queryProps: TableExQuery[] }) {
     this.queryProps = opt.queryProps
     let query: any = {}
-    this.queryProps.forEach((ele) => {
+    this.queryProps?.forEach((ele) => {
       query[ele.prop] = {
         value: '',
         matchType: ele.matchType || '',
@@ -27,8 +29,10 @@ export class TableExModel<T = any> {
     orderBy: '',
     sortOrder: '',
   }
-  query: T = null
+  query: { [key: string]: { value: string; matchType: string } } = null
   selection = []
+  data = []
+  total = 0
   setPage(p: { index?: any; size?: any }) {
     if (p) {
       const index = parseInt(p.index)

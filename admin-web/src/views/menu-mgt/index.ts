@@ -1,3 +1,2 @@
-import { MenuMgt } from './menu-mgt'
-export * from './menu-mgt'
-export default MenuMgt
+export * from './menu-mgt.vue'
+export { default } from './menu-mgt.vue'

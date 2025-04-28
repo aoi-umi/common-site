@@ -1,1 +1,1 @@
-export * from './buttons'
+export { default as Buttons } from './buttons.vue'
