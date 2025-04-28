@@ -267,7 +267,7 @@ const runLoadData = () => {
   }
 }
 
-const getNewData = () => ({
+const getNewData = (): AuthorityDataType => ({
   id: null,
   name: '',
   text: '',

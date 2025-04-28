@@ -116,7 +116,7 @@ const loadData = async () => {
 const loadDataFn = async () => {
   if (props.loadFn) {
     let rs = await props.loadFn({ model })
-    model.value.total = rs.total
+    model.value.total = rs.total || 0
     model.value.data = rs.data
   }
 }

@@ -314,7 +314,7 @@ const runLoadData = () => {
   }
 }
 
-const getNewData = () => ({
+const getNewData = (): RoleDataType => ({
   id: null,
   name: '',
   text: '',

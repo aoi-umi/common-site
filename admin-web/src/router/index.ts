@@ -44,14 +44,14 @@ export const routes: Array<RouteRecordRaw> = [
       text: '角色管理',
     },
   },
-  // {
-  //   path: '/apiMgt',
-  //   component: () => import('../views/api-mgt'),
-  //   meta: {
-  //     name: 'apiMgt',
-  //     text: 'api管理',
-  //   },
-  // },
+  {
+    path: '/apiMgt',
+    component: () => import('../views/api-mgt'),
+    meta: {
+      name: 'apiMgt',
+      text: 'api管理',
+    },
+  },
   {
     path: '/adminUser/:id',
     component: () => import('../views/admin-user'),
