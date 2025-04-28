@@ -11,7 +11,6 @@ export interface UserInfo {
   avatarUrl?: string
   isSysAdmin?: boolean
   roleList?: RoleDataType[]
-  authorityList?: AuthorityDataType[]
   allAuthorityList?: AuthorityDataType[]
   authority?: string[]
 }

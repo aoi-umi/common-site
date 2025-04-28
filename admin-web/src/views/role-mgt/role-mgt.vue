@@ -241,6 +241,14 @@ const addClick = () => {
   editData()
 }
 
+const getNewData = (): RoleDataType => ({
+  id: null,
+  name: '',
+  text: '',
+  status: true,
+  authorityList: [],
+})
+
 const editClick = (row) => {
   editingData.value = { ...row }
   editData()
@@ -248,17 +256,11 @@ const editClick = (row) => {
 
 const editData = () => {
   if (editingData.value.id) {
-    formOpt.value.name = {
-      ...formOpt.value.name,
-      disabled: true,
-      showDisabled: true,
-    }
+    formOpt.value.name.disabled = true
+    formOpt.value.name.showDisabled = true
   } else {
-    formOpt.value.name = {
-      ...formOpt.value.name,
-      disabled: false,
-      showDisabled: false,
-    }
+    formOpt.value.name.disabled = false
+    formOpt.value.name.showDisabled = false
   }
   authData.value.list = editingData.value.authorityList.map((ele) =>
     AuthoritySelectModel.toTransferData(ele),
@@ -313,14 +315,6 @@ const runLoadData = () => {
     table.value.loadData()
   }
 }
-
-const getNewData = (): RoleDataType => ({
-  id: null,
-  name: '',
-  text: '',
-  status: true,
-  authorityList: [],
-})
 
 const toggleNameEdit = () => {
   formOpt.value.name.disabled = !formOpt.value.name.disabled

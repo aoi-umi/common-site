@@ -60,14 +60,14 @@ export const routes: Array<RouteRecordRaw> = [
       text: '用户',
     },
   },
-  // {
-  //   path: '/adminUserMgt',
-  //   component: () => import('../views/admin-user-mgt'),
-  //   meta: {
-  //     name: 'adminUserMgt',
-  //     text: '管理端用户管理',
-  //   },
-  // },
+  {
+    path: '/adminUserMgt',
+    component: () => import('../views/admin-user-mgt'),
+    meta: {
+      name: 'adminUserMgt',
+      text: '管理端用户管理',
+    },
+  },
   {
     path: '/:path(.*)',
     component: () => import('../views/error'),

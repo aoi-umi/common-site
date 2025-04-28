@@ -25,7 +25,7 @@ const { $api } = usePlugins()
 
 export type RoleTransferData = TransferData<RoleDataType>
 export type RoleQueryDataType = TransferQueryDataType<RoleDataType>
-export type RoleSelectDataType = TransferSelectDataType<RoleDataType>
+export type RoleSelectDataType = TransferSelectDataType<RoleTransferData>
 
 const model = defineModel<RoleSelectDataType>({ required: true })
 const select = ref<TransferSelectInstance>()
