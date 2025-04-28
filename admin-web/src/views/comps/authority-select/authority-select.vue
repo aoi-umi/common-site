@@ -25,7 +25,8 @@ const { $api } = usePlugins()
 
 export type AuthorityTransferData = TransferData<AuthorityDataType>
 export type AuthorityQueryDataType = TransferQueryDataType<AuthorityDataType>
-export type AuthoritySelectDataType = TransferSelectDataType<AuthorityDataType>
+export type AuthoritySelectDataType =
+  TransferSelectDataType<AuthorityTransferData>
 
 const model = defineModel<AuthoritySelectDataType>({ required: true })
 const select = ref<TransferSelectInstance>()

@@ -37,7 +37,7 @@
   </div>
 </template>
 
-<script lang="ts" setup generic="T">
+<script lang="ts" setup>
 import { PropType, ref } from 'vue'
 import {
   TransferData,
@@ -51,7 +51,7 @@ const props = defineProps({
     required: true,
   },
   toTransferData: {
-    type: Function as PropType<(data: T) => TransferData<T>>,
+    type: Function as PropType<(data: any) => TransferData>,
     required: true,
   },
 })

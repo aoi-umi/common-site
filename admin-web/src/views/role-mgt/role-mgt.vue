@@ -11,9 +11,11 @@
       :buttons="tableButtons"
     />
     <el-dialog
+      :class="cls.dialog"
       append-to-body
       v-model="editDiaVisible"
       :title="editingData?.id ? '修改' : '新增'"
+      width="800px"
     >
       <template v-if="editingData">
         <div v-loading="op.loading">
@@ -47,11 +49,14 @@
             <el-form-item label="启用状态" prop="status">
               <el-switch v-model="editingData.status" />
             </el-form-item>
+            <el-form-item label="权限" prop="authorityList">
+              <AuthoritySelect ref="authSelect" v-model="authData" />
+            </el-form-item>
           </el-form>
-          <div>
-            <el-button @click="saveClick">保存</el-button>
-          </div>
         </div>
+      </template>
+      <template #footer>
+        <el-button @click="saveClick">保存</el-button>
       </template>
     </el-dialog>
   </div>
@@ -62,23 +67,33 @@ import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { FormInstance } from 'element-plus'
 
-import { TableEx, Buttons, TableExInstance } from '@/components'
+import { TableEx, Buttons, Tags, TableExInstance } from '@/components'
+import { cls } from '@/components/styles'
 import { QueryOpEnum } from '@/models/enum'
 import { usePlugins } from '@/plugins'
 import { Confirm } from '@/components/decorator'
 
+import {
+  AuthoritySelect,
+  AuthoritySelectDataType,
+  AuthoritySelectInstance,
+  AuthoritySelectModel,
+} from '../comps/authority-select'
+import { AuthorityDataType } from '../authority-mgt'
 import Base from '../base'
 
-const { $api, $utils } = usePlugins()
-const { getOpModel, gotoPage } = Base()
-const $route = useRoute()
-
-export type AuthorityDataType = {
+export type RoleDataType = {
   id?: string
   name?: string
   text?: string
   status?: boolean
+  authorityList?: AuthorityDataType[]
+  canOperate?: boolean
 }
+
+const { $api, $utils } = usePlugins()
+const { getOpModel, gotoPage } = Base()
+const $route = useRoute()
 
 const op = ref(
   getOpModel<{ op: string; data: any }>({
@@ -88,6 +103,16 @@ const op = ref(
     },
   }),
 )
+
+const table = ref<TableExInstance>(null)
+const form = ref<FormInstance>(null)
+const authSelect = ref<AuthoritySelectInstance>(null)
+const originalData = ref(null)
+
+const authData = ref<AuthoritySelectDataType>({
+  list: [],
+  value: [],
+})
 
 const editingData = ref(null)
 const editDiaVisible = ref(false)
@@ -114,6 +139,14 @@ const columns = [
     label: '显示',
   },
   {
+    prop: 'authorityList',
+    label: '权限',
+    render: (params) => {
+      const data = params.row
+      return <Tags items={data.authorityList}></Tags>
+    },
+  },
+  {
     prop: 'status',
     label: '状态',
     render: (params) => {
@@ -129,17 +162,19 @@ const columns = [
       const data = params.row
       return (
         <div>
-          <Buttons
-            defaultType="text"
-            items={[
-              { label: '修改', click: () => editClick(data) },
-              {
-                label: data.status ? '禁用' : '启用',
-                click: () => enableToggleClick(data),
-              },
-              { label: '删除', click: () => delClick(data) },
-            ]}
-          />
+          {data.canOperate && (
+            <Buttons
+              defaultType="text"
+              items={[
+                { label: '修改', click: () => editClick(data) },
+                {
+                  label: data.status ? '禁用' : '启用',
+                  click: () => enableToggleClick(data),
+                },
+                { label: '删除', click: () => delClick(data) },
+              ]}
+            />
+          )}
         </div>
       )
     },
@@ -185,7 +220,8 @@ const tableButtons = [
 const loadData = async (opt) => {
   const model = table.value.model
   const data = $utils.tableExModel2ApiParams({ model })
-  const rs = await $api.sysAuthorityQuery({ ...data })
+  const rs = await $api.sysRoleQuery({ ...data })
+
   return {
     total: rs.total,
     data: rs.rows,
@@ -194,7 +230,7 @@ const loadData = async (opt) => {
 
 class FunctionWrapper {
   @Confirm((data) => `确认删除[${data.text}(${data.name})]?`)
-  static async delClick(data: AuthorityDataType) {
+  static async delClick(data: RoleDataType) {
     const rs = await op.value.run({ op: 'del', data })
     if (rs.success) runLoadData()
   }
@@ -224,6 +260,13 @@ const editData = () => {
       showDisabled: false,
     }
   }
+  authData.value.list = editingData.value.authorityList.map((ele) =>
+    AuthoritySelectModel.toTransferData(ele),
+  )
+  console.log(authData.value.list)
+  authData.value.value = authData.value.list.map((ele) => ele.key)
+  form.value?.resetFields()
+  authSelect.value?.reset()
   editDiaVisible.value = true
 }
 
@@ -233,9 +276,13 @@ const saveClick = async () => {
 }
 
 const save = async (data) => {
+  const authorityList = authData.value.list
+    .filter((ele) => authData.value.value.includes(ele.key))
+    .map((ele) => ({ id: ele.data.id }))
+  data.authorityList = authorityList
   if (editDiaVisible.value) await $utils.validateForm(form.value)
-  if (!data.id) await $api.sysAuthorityCreate(data)
-  else await $api.sysAuthorityUpdate(data)
+  if (!data.id) await $api.sysRoleCreate(data)
+  else await $api.sysRoleUpdate(data)
   editDiaVisible.value = false
 }
 
@@ -250,7 +297,7 @@ const enableToggleClick = async (data) => {
 const delClick = FunctionWrapper.delClick
 
 const del = async (data) => {
-  await $api.sysAuthorityDelete({ id: data.id })
+  await $api.sysRoleDelete({ id: data.id })
 }
 
 const toQuery = (opt) => {
@@ -272,6 +319,7 @@ const getNewData = () => ({
   name: '',
   text: '',
   status: true,
+  authorityList: [],
 })
 
 const toggleNameEdit = () => {
@@ -280,10 +328,6 @@ const toggleNameEdit = () => {
     editingData.value.name = originalData.value.name
   }
 }
-
-const table = ref<TableExInstance>(null)
-const form = ref<FormInstance>(null)
-const originalData = ref(null)
 
 watch(() => $route.fullPath, runLoadData)
 

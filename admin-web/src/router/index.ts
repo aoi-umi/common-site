@@ -36,14 +36,14 @@ export const routes: Array<RouteRecordRaw> = [
       text: '权限管理',
     },
   },
-  // {
-  //   path: '/roleMgt',
-  //   component: () => import('../views/role-mgt'),
-  //   meta: {
-  //     name: 'roleMgt',
-  //     text: '角色管理',
-  //   },
-  // },
+  {
+    path: '/roleMgt',
+    component: () => import('../views/role-mgt'),
+    meta: {
+      name: 'roleMgt',
+      text: '角色管理',
+    },
+  },
   // {
   //   path: '/apiMgt',
   //   component: () => import('../views/api-mgt'),

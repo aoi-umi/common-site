@@ -37,7 +37,7 @@
         <component :is="pagination()"></component>
       </div>
 
-      <el-table v-bind="tableProps">
+      <el-table v-bind="tableProps" :data="tableProps.data ?? model.data">
         <el-table-column v-for="(ele, index) in cols" :key="index" v-bind="ele">
           <template v-if="ele.render" #default="{ row }">
             <component :is="ele.render({ row })"></component>
@@ -78,6 +78,7 @@ const props = defineProps({
   columns: Array as () => TableExColumnProp[],
   queryProps: Array as () => TableExQuery[],
   buttons: Array,
+  total: Number,
   loadFn: Function as PropType<
     (opt: { model: Ref<TableExModel> }) => any | Promise<any>
   >,
@@ -114,7 +115,9 @@ const loadData = async () => {
 
 const loadDataFn = async () => {
   if (props.loadFn) {
-    return props.loadFn({ model })
+    let rs = await props.loadFn({ model })
+    model.value.total = rs.total
+    model.value.data = rs.data
   }
 }
 
@@ -124,7 +127,7 @@ const pagination = () => (
     background
     layout="total, sizes, prev, pager, next, jumper"
     hideOnSinglePage
-    total={model.value.total}
+    total={props.total ?? model.value.total}
     v-model:currentPage={model.value.page.index}
     v-model:pageSize={model.value.page.size}
   />

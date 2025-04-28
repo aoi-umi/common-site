@@ -1,3 +1,2 @@
-import { RoleMgt } from './role-mgt'
-export * from './role-mgt'
-export default RoleMgt
+export * from './role-mgt.vue'
+export { default } from './role-mgt.vue'

@@ -18,8 +18,8 @@
           </template>
           <el-menu class="search-menu">
             <component
-              v-for="(ele, idx) in searchData"
-              :is="renderMenuItem(ele, { prefix: `${idx}` })"
+              v-for="ele in searchData"
+              :is="renderMenuItem(ele)"
               :key="`${ele.id}`"
             ></component>
           </el-menu>
@@ -58,10 +58,14 @@
       </div>
     </div>
     <div class="main">
-      <el-menu class="menu" :collapse="menuCollapse">
+      <el-menu
+        class="menu"
+        :collapse="menuCollapse"
+        :default-active="activeMenu"
+      >
         <component
-          v-for="(ele, idx) in menu"
-          :is="renderMenuItem(ele, { prefix: `${idx}` })"
+          v-for="ele in menu"
+          :is="renderMenuItem(ele)"
           :key="`${ele.id}`"
         ></component>
       </el-menu>
@@ -113,6 +117,7 @@ const op = ref(
   }),
 )
 const defaultIcon = ref('el-icon-menu')
+const activeMenu = ref('')
 
 const menuAuth = computed(() => {
   const path = route.path
@@ -159,10 +164,12 @@ const loadData = async () => {
   }
   if (isDev.value) {
     const all = routes.map((ele) => ({
+      id: `menu-${ele.path}`,
       text: ele.meta?.text as string,
       path: ele.path,
     }))
     menu.value.push({
+      id: 'all',
       text: '全部组件(admin)',
       children: all,
     })
@@ -197,6 +204,7 @@ const findMenu = (
 const setTitleByRoute = () => {
   const menu = findCurrMenu()
   $utils.setTitle(menu?.text || currEnvCfg.title)
+  if (menu) activeMenu.value = menu.id
 }
 
 const search = () => {
@@ -249,16 +257,12 @@ const signOut = async () => {
   await loadData()
 }
 
-const renderMenuItem = (ele: MainMenuType, opt?: { prefix?: string }) => {
-  opt = {
-    ...opt,
-  }
-  let prefix = opt.prefix || ''
+const renderMenuItem = (ele: MainMenuType) => {
   let icon = ele.icon || defaultIcon.value
   const Icon = $utils.getCompByName(icon)
   if (ele.children?.length) {
     return (
-      <el-sub-menu index={prefix}>
+      <el-sub-menu index={ele.id}>
         {{
           title: () => [
             <el-icon>
@@ -267,15 +271,13 @@ const renderMenuItem = (ele: MainMenuType, opt?: { prefix?: string }) => {
             <span>{ele.text}</span>,
           ],
           default: () =>
-            ele.children.map((child, idx) =>
-              renderMenuItem(child, { prefix: `${prefix}-${idx}` }),
-            ),
+            ele.children.map((child, idx) => renderMenuItem(child)),
         }}
       </el-sub-menu>
     )
   }
   const item = (
-    <el-menu-item index={prefix}>
+    <el-menu-item index={ele.id}>
       {{
         title: () => <span slot="title">{ele.text}</span>,
         default: () => (
